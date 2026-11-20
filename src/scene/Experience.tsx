@@ -27,9 +27,9 @@ function Experience({
                     vehiclePosition={vehiclePosition}
                 />
 
-                <Tower surfaceDirection={[1, 1, 0]} />
-                <Tower surfaceDirection={[1.5, 1, 0]} />
-                <Tower surfaceDirection={[1, 1.5, 0.25]} />
+                <Tower surfaceDirection={[0.2, 1, 0]} />
+                <Tower surfaceDirection={[0.1, 0.4, 0.1]} />
+                <Tower surfaceDirection={[-0.25, 2, 0.25]} />
             </Physics>
             <Lighting target={vehiclePosition} />
         </>
