@@ -19,8 +19,10 @@ function Lighting({ target }: { target: RefObject<THREE.Vector3> }) {
                 castShadow
                 intensity={3}
                 color="#ffffff"
-                shadow-mapSize-width={512}
-                shadow-mapSize-height={512}
+                shadow-mapSize-width={1024}
+                shadow-mapSize-height={1024}
+                shadow-bias={-0.0001}
+                shadow-normalBias={0.02}
                 shadow-camera-left={-100}
                 shadow-camera-right={100}
                 shadow-camera-top={100}

@@ -32,11 +32,3 @@ body {
   font: inherit;
   cursor: pointer;
 }
-
-.joystick-control {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  z-index: 2;
-  touch-action: none;
-}

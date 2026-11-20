@@ -1,6 +1,9 @@
 .joystick-control {
+    position: absolute;
     max-width: min-content;
     left: 50% !important;
     bottom: 4rem !important;
     transform: translateX(-50%);
+    z-index: 2;
+    touch-action: none;
 }

@@ -17,6 +17,14 @@ function Monster({ position }: { position?: [number, number, number] }) {
     const busy = useRef(false)
     const currentAction = useRef<THREE.AnimationAction | null>(null)
 
+    scene.traverse((object) => {
+        if ((object as THREE.Mesh).isMesh) {
+            object.castShadow = true
+            object.receiveShadow = true
+        }
+    })
+
+
     useEffect(() => {
         playClip(actions, currentAction, 'IdleDown', true)
     }, [actions])
