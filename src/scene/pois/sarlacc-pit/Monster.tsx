@@ -9,35 +9,27 @@ type Actions = Record<string, THREE.AnimationAction | null>
 
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
-function playClip(actions: Actions, name: string, loop: boolean) {
-    Object.values(actions).forEach((a) => a?.stop())
-    const action = actions[name]
-    if (!action) return 0
-    action.setLoop(loop ? THREE.LoopRepeat : THREE.LoopOnce, loop ? Infinity : 1)
-    action.clampWhenFinished = true
-    action.reset().play()
-    return action.getClip().duration * 1000
-}
 
 function Monster({ position }: { position?: [number, number, number] }) {
     const group = useRef<THREE.Group>(null!)
     const { scene, animations } = useGLTF(MODEL_PATH)
     const { actions } = useAnimations(animations, group)
     const busy = useRef(false)
+    const currentAction = useRef<THREE.AnimationAction | null>(null)
 
     useEffect(() => {
-        playClip(actions, 'IdleDown', true)
+        playClip(actions, currentAction, 'IdleDown', true)
     }, [actions])
 
     const runSequence = async () => {
         if (busy.current) return
         busy.current = true
 
-        await wait(playClip(actions, 'MouthSnap', false))
-        playClip(actions, 'Idle', true)
-        await wait(3000)
-        await wait(playClip(actions, 'DropDown', false))
-        playClip(actions, 'IdleDown', true)
+        await wait(playClip(actions, currentAction, 'MouthSnap', false))
+        playClip(actions, currentAction, 'Idle', true)
+        await wait(1500)
+        await wait(playClip(actions, currentAction, 'DropDown', false))
+        playClip(actions, currentAction, 'IdleDown', true)
 
         busy.current = false
     }
@@ -56,6 +48,29 @@ function Monster({ position }: { position?: [number, number, number] }) {
         </group>
     )
 }
+
+function playClip(
+    actions: Actions,
+    currentAction: { current: THREE.AnimationAction | null },
+    name: string,
+    loop: boolean
+) {
+    const action = actions[name]
+    if (!action) return 0
+
+    action.setLoop(loop ? THREE.LoopRepeat : THREE.LoopOnce, loop ? Infinity : 1)
+    action.clampWhenFinished = !loop
+
+    const previous = currentAction.current
+    action.reset().play()
+    if (previous && previous !== action) {
+        previous.crossFadeTo(action, 0.25, false)
+    }
+    currentAction.current = action
+
+    return action.getClip().duration * 1000
+}
+
 
 useGLTF.preload(MODEL_PATH)
 

@@ -1,0 +1,6 @@
+.joystick-control {
+    max-width: min-content;
+    left: 50% !important;
+    bottom: 4rem !important;
+    transform: translateX(-50%);
+}

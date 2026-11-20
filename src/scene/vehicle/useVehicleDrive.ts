@@ -42,8 +42,7 @@ function useVehicleDrive(
         }
         forward.normalize()
 
-        const { forward: accelerate, back, left, right: steerRight } = getControls()
-        const steer = Number(left) - Number(steerRight)
+        const { throttle, steer } = getControls()
         if (steer !== 0) forward.applyAxisAngle(up, steer * TURN_SPEED * PHYSICS_TIME_STEP)
 
         basisRight.crossVectors(up, forward).normalize()
@@ -65,14 +64,13 @@ function useVehicleDrive(
             true
         )
 
-        const direction = Number(accelerate) - Number(back)
-        if (direction !== 0) {
+        if (throttle !== 0) {
             rb.wakeUp()
             rb.applyImpulse(
                 {
-                    x: forward.x * direction * ACCELERATION * rb.mass() * PHYSICS_TIME_STEP,
-                    y: forward.y * direction * ACCELERATION * rb.mass() * PHYSICS_TIME_STEP,
-                    z: forward.z * direction * ACCELERATION * rb.mass() * PHYSICS_TIME_STEP,
+                    x: forward.x * throttle * ACCELERATION * rb.mass() * PHYSICS_TIME_STEP,
+                    y: forward.y * throttle * ACCELERATION * rb.mass() * PHYSICS_TIME_STEP,
+                    z: forward.z * throttle * ACCELERATION * rb.mass() * PHYSICS_TIME_STEP,
                 },
                 true
             )

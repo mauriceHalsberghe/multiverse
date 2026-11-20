@@ -2,11 +2,16 @@ import { useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { KeyboardControls, OrbitControls } from '@react-three/drei'
 import Experience from './scene/Experience'
+import JoyStick from './ui/JoyStick'
+import { useIsMobile } from './utils/useIsMobile'
+ 
 
 function App() {
     const [orbitControlsEnabled, setOrbitControlsEnabled] = useState(false)
     const debugEnabled = import.meta.env.VITE_DEBUG === 'true'
     const showOrbitToggle = import.meta.env.DEV && debugEnabled
+
+    const isMobile = useIsMobile();
 
     return (
         <div className="app">
@@ -28,6 +33,9 @@ function App() {
                     />
                 </Canvas>
             </KeyboardControls>
+
+            {isMobile && <JoyStick />}
+
             {showOrbitToggle && (
                 <button
                     className="orbit-toggle"

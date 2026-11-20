@@ -1,4 +1,5 @@
 @import url("./poi-label.css");
+@import url("./joystick.css");
 
 html,
 body,
@@ -30,4 +31,12 @@ body {
   color: #3d2918;
   font: inherit;
   cursor: pointer;
+}
+
+.joystick-control {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  z-index: 2;
+  touch-action: none;
 }

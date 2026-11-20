@@ -3,8 +3,8 @@ import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import type { RapierRigidBody } from '@react-three/rapier'
 
-const CAMERA_OFFSET = new THREE.Vector3(0, 20, -35)
-const CAMERA_SMOOTHING = 12
+const CAMERA_OFFSET = new THREE.Vector3(0, 25, -35)
+const CAMERA_SMOOTHING = 5
 const cameraTarget = new THREE.Vector3()
 const targetPosition = new THREE.Vector3()
 const cameraPosition = new THREE.Vector3()
