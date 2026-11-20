@@ -5,8 +5,9 @@ import { PHYSICS_TIME_STEP } from './physicsConfig'
 import Lighting from './Lighting'
 import Landspeeder from './vehicle/Landspeeder'
 import Desert from './world/Desert'
-import House from './world/House'
-import Tower from './world/Tower'
+import { Suspense } from 'react'
+import Homestead from './pois/homestead/Homestead'
+import SarlaccPit from './pois/sarlacc-pit/SarlaccPit'
 
 function Experience({
     orbitControlsEnabled,
@@ -18,21 +19,21 @@ function Experience({
     const vehiclePosition = useRef(new THREE.Vector3(0, 212, 0))
 
     return (
-        <>
+        <Suspense fallback={null}>
             <Physics debug={debugEnabled} timeStep={PHYSICS_TIME_STEP}>
                 <Desert />
-                <House />
+                
                 <Landspeeder
                     orbitControlsEnabled={orbitControlsEnabled}
                     vehiclePosition={vehiclePosition}
                 />
 
-                <Tower surfaceDirection={[0.2, 1, 0]} />
-                <Tower surfaceDirection={[0.1, 0.4, 0.1]} />
-                <Tower surfaceDirection={[-0.25, 2, 0.25]} />
+                <Homestead />
+                <SarlaccPit />
+
             </Physics>
             <Lighting target={vehiclePosition} />
-        </>
+        </Suspense>
     )
 }
 

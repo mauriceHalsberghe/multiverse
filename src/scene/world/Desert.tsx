@@ -3,8 +3,11 @@ import { BallCollider, RigidBody } from '@react-three/rapier'
 import * as THREE from 'three'
 import { PLANET_RADIUS, PLANET_SCALE } from './planetPlacement'
 
+const MODEL_PATH = '/models/desert_sphere.glb'
+
+
 function Desert() {
-    const { scene } = useGLTF('/models/desert_sphere.glb')
+    const { scene } = useGLTF(MODEL_PATH)
     scene.traverse((o) => {
         if ((o as THREE.Mesh).isMesh) o.receiveShadow = true
     })
@@ -15,4 +18,7 @@ function Desert() {
         </RigidBody>
     )
 }
+
+useGLTF.preload(MODEL_PATH)
+
 export default Desert;

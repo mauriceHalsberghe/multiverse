@@ -1,0 +1,11 @@
+.poi-label {
+  width: max-content;
+  padding: 0.5rem 1.5rem;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
+  color: #ffffffd5;
+  font: 600 2rem sans-serif;
+  letter-spacing: 0.04em;
+  text-align: center;
+}

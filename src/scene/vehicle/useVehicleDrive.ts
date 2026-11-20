@@ -5,7 +5,7 @@ import { PHYSICS_TIME_STEP } from '../physicsConfig'
 import useVehicleControls from './useVehicleControls'
 
 const ACCELERATION = 80
-const MAX_SPEED = 130
+const MAX_SPEED = 120
 const TURN_SPEED = 2
 const GRAVITY = 9.81
 

@@ -1,8 +1,8 @@
 import { useMemo } from 'react'
 import { useGLTF } from '@react-three/drei'
-import { RigidBody } from '@react-three/rapier'
+import { CylinderCollider, RigidBody } from '@react-three/rapier'
 import * as THREE from 'three'
-import { getPlanetPlacement } from './planetPlacement'
+import { getPlanetPlacement } from '../../world/planetPlacement'
 
 const MODEL_PATH = '/models/vaporizer.glb'
 
@@ -27,11 +27,12 @@ function Tower({ surfaceDirection }: TowerProps) {
     return (
         <RigidBody
             type="fixed"
-            colliders="cuboid"
+            colliders={false}
             position={placement.position}
             rotation={placement.rotation}
             scale={1}
-        >
+        >   
+            <CylinderCollider args={[8, 2]} position={[0, 8, 0]} />
             <primitive object={tower} />
         </RigidBody>
     )
