@@ -8,6 +8,7 @@ import Desert from './world/Desert'
 import { Suspense } from 'react'
 import Homestead from './pois/homestead/Homestead'
 import SarlaccPit from './pois/sarlacc-pit/SarlaccPit'
+import Cantina from './pois/cantina/Cantina'
 
 function Experience({
     orbitControlsEnabled,
@@ -30,6 +31,7 @@ function Experience({
 
                 <Homestead />
                 <SarlaccPit />
+                <Cantina />
 
             </Physics>
             <Lighting target={vehiclePosition} />

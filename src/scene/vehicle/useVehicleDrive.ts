@@ -81,6 +81,7 @@ function useVehicleDrive(
             .set(velocity.x, velocity.y, velocity.z)
             .addScaledVector(up, -(velocity.x * up.x + velocity.y * up.y + velocity.z * up.z))
         const speed = tangentVelocity.length()
+
         if (speed > MAX_SPEED) {
             const scale = MAX_SPEED / speed
             tangentVelocity.multiplyScalar(scale)

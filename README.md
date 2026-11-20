@@ -63,3 +63,15 @@ Maurice Halsberghe
 
 Development 3: Virtual Worlds
 2026 - 2027
+
+
+## Ideas
+
+- Cantina: music
+- Crashed ship
+- Tusken raider camp
+- pod racers
+- canyon
+- crashed escape pod
+- rigidbody crates
+

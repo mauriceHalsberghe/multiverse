@@ -24,11 +24,6 @@ body {
   top: 1rem;
   left: 1rem;
   z-index: 1;
-  padding: 0.5rem 0.75rem;
-  border: 1px solid #6b4324;
-  border-radius: 0.35rem;
-  background: #fff1d0;
-  color: #3d2918;
   font: inherit;
   cursor: pointer;
 }
