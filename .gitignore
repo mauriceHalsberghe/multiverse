@@ -23,4 +23,4 @@ dist-ssr
 *.sln
 *.sw?
 
-.envsrc/assets/binary-sun-skydome_2K.*
+.env
