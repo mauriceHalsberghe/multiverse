@@ -7,15 +7,12 @@ import useVehicleControls from './useVehicleControls'
 const ACCELERATION = 80
 const MAX_SPEED = 120
 const TURN_SPEED = 2
-const GRAVITY = 9.81
 
 const rotation = new THREE.Quaternion()
-const orientation = new THREE.Quaternion()
-const orientationMatrix = new THREE.Matrix4()
-const up = new THREE.Vector3()
+const yawRotation = new THREE.Quaternion()
+const up = new THREE.Vector3(0, 1, 0)
 const forward = new THREE.Vector3(0, 0, 1)
-const basisRight = new THREE.Vector3()
-const tangentVelocity = new THREE.Vector3()
+const horizontalVelocity = new THREE.Vector3()
 
 function useVehicleDrive(
     body: RefObject<RapierRigidBody>,
@@ -31,38 +28,24 @@ function useVehicleDrive(
         rotation.set(r.x, r.y, r.z, r.w)
         const position = rb.translation()
         vehiclePosition.current.set(position.x, position.y, position.z)
-        up.set(position.x, position.y, position.z)
-        if (up.lengthSq() === 0) return
-        up.normalize()
 
         forward.set(0, 0, 1).applyQuaternion(rotation)
-        forward.addScaledVector(up, -forward.dot(up))
-        if (forward.lengthSq() < 1e-8) {
-            forward.set(1, 0, 0).addScaledVector(up, -up.x)
-        }
+        forward.y = 0
         forward.normalize()
 
         const { throttle, steer } = getControls()
-        if (steer !== 0) forward.applyAxisAngle(up, steer * TURN_SPEED * PHYSICS_TIME_STEP)
-
-        basisRight.crossVectors(up, forward).normalize()
-        forward.crossVectors(basisRight, up).normalize()
-        orientationMatrix.makeBasis(basisRight, up, forward)
-        orientation.setFromRotationMatrix(orientationMatrix)
-        rb.setRotation(
-            { x: orientation.x, y: orientation.y, z: orientation.z, w: orientation.w },
-            true
-        )
+        if (steer !== 0) {
+            yawRotation.setFromAxisAngle(up, steer * TURN_SPEED * PHYSICS_TIME_STEP)
+            rotation.multiply(yawRotation)
+            rb.setRotation(
+                { x: rotation.x, y: rotation.y, z: rotation.z, w: rotation.w },
+                true
+            )
+            forward.set(0, 0, 1).applyQuaternion(rotation)
+            forward.y = 0
+            forward.normalize()
+        }
         rb.setAngvel({ x: 0, y: 0, z: 0 }, true)
-
-        rb.applyImpulse(
-            {
-                x: -up.x * GRAVITY * rb.mass() * PHYSICS_TIME_STEP,
-                y: -up.y * GRAVITY * rb.mass() * PHYSICS_TIME_STEP,
-                z: -up.z * GRAVITY * rb.mass() * PHYSICS_TIME_STEP,
-            },
-            true
-        )
 
         if (throttle !== 0) {
             rb.wakeUp()
@@ -77,18 +60,14 @@ function useVehicleDrive(
         }
 
         const velocity = rb.linvel()
-        tangentVelocity
-            .set(velocity.x, velocity.y, velocity.z)
-            .addScaledVector(up, -(velocity.x * up.x + velocity.y * up.y + velocity.z * up.z))
-        const speed = tangentVelocity.length()
+        horizontalVelocity.set(velocity.x, 0, velocity.z)
+        const speed = horizontalVelocity.length()
 
         if (speed > MAX_SPEED) {
             const scale = MAX_SPEED / speed
-            tangentVelocity.multiplyScalar(scale)
-            const radialSpeed = velocity.x * up.x + velocity.y * up.y + velocity.z * up.z
-            tangentVelocity.addScaledVector(up, radialSpeed)
+            horizontalVelocity.multiplyScalar(scale)
             rb.setLinvel(
-                { x: tangentVelocity.x, y: tangentVelocity.y, z: tangentVelocity.z },
+                { x: horizontalVelocity.x, y: velocity.y, z: horizontalVelocity.z },
                 true
             )
         }

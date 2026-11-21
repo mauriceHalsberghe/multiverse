@@ -4,6 +4,7 @@ import { KeyboardControls, OrbitControls } from '@react-three/drei'
 import Experience from './scene/Experience'
 import JoyStick from './ui/JoyStick'
 import { useIsMobile } from './utils/useIsMobile'
+import { useAudioUnlock } from './utils/useAudioUnlock'
  
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
     const showOrbitToggle = import.meta.env.DEV && debugEnabled
 
     const isMobile = useIsMobile();
+    useAudioUnlock()
 
     return (
         <div className="app">

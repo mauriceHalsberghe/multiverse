@@ -17,7 +17,7 @@ function Experience({
     orbitControlsEnabled: boolean
     debugEnabled: boolean
 }) {
-    const vehiclePosition = useRef(new THREE.Vector3(0, 212, 0))
+    const vehiclePosition = useRef(new THREE.Vector3(0, 2, 0))
 
     return (
         <Suspense fallback={null}>

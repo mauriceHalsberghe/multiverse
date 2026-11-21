@@ -6,7 +6,7 @@ function Lighting({ target }: { target: RefObject<THREE.Vector3> }) {
     const light = useRef<THREE.DirectionalLight>(null!)
 
     useFrame(() => {
-        light.current.position.set(target.current.x + 30, target.current.y + 40, target.current.z + 20)
+        light.current.position.set(target.current.x + 10, target.current.y + 40, target.current.z + 20)
         light.current.target.position.copy(target.current)
         light.current.target.updateMatrixWorld()
     })

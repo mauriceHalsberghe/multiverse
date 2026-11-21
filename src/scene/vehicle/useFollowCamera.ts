@@ -3,13 +3,17 @@ import * as THREE from 'three'
 import { useFrame } from '@react-three/fiber'
 import type { RapierRigidBody } from '@react-three/rapier'
 
-const CAMERA_OFFSET = new THREE.Vector3(0, 25, -35)
+const CAMERA_OFFSET = new THREE.Vector3(0, 20, -35)
+const CAMERA_LOOK_AHEAD = 15
+const CAMERA_LOOK_HEIGHT = 2.5
 const CAMERA_SMOOTHING = 5
 const cameraTarget = new THREE.Vector3()
+const cameraLookTarget = new THREE.Vector3()
 const targetPosition = new THREE.Vector3()
 const cameraPosition = new THREE.Vector3()
 const cameraOffset = new THREE.Vector3()
-const up = new THREE.Vector3()
+const up = new THREE.Vector3(0, 1, 0)
+const forward = new THREE.Vector3()
 const rotation = new THREE.Quaternion()
 const cameraRotation = new THREE.Quaternion()
 
@@ -40,12 +44,19 @@ function useFollowCamera(enabled: boolean, body: RefObject<RapierRigidBody>) {
             cameraRotation.slerp(rotation, smoothing)
         }
 
-        up.copy(cameraTarget).normalize()
+        up.set(0, 1, 0)
         cameraOffset.copy(CAMERA_OFFSET).applyQuaternion(cameraRotation)
         cameraPosition.copy(cameraTarget).add(cameraOffset)
+        forward.set(0, 0, 1).applyQuaternion(cameraRotation)
+        forward.y = 0
+        forward.normalize()
+        cameraLookTarget
+            .copy(cameraTarget)
+            .addScaledVector(forward, CAMERA_LOOK_AHEAD)
+            .addScaledVector(up, CAMERA_LOOK_HEIGHT)
         state.camera.up.copy(up)
         state.camera.position.copy(cameraPosition)
-        state.camera.lookAt(cameraTarget)
+        state.camera.lookAt(cameraLookTarget)
     })
 }
 

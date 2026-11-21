@@ -6,7 +6,7 @@ import useFollowCamera from './useFollowCamera'
 import useVehicleDrive from './useVehicleDrive'
 
 const MODEL_PATH = '/models/landspeeder.glb'
-const START_POSITION: [number, number, number] = [0, 212, 0]
+const START_POSITION: [number, number, number] = [4, 1, 0]
 
 function Landspeeder({
     orbitControlsEnabled,
@@ -29,10 +29,11 @@ function Landspeeder({
         <RigidBody
             ref={body}
             colliders={false}
-            gravityScale={0}
+            gravityScale={1}
             linearDamping={2}
             angularDamping={8}
             position={START_POSITION}
+            scale={0.9}
         >
             <CuboidCollider
                 args={[2.5, 2, 6]}

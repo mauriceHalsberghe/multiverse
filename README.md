@@ -74,4 +74,4 @@ Development 3: Virtual Worlds
 - canyon
 - crashed escape pod
 - rigidbody crates
-
+- collect all droids (explore minigame)

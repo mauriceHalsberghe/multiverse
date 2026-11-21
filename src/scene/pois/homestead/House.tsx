@@ -1,10 +1,10 @@
 import { useGLTF } from '@react-three/drei'
 import { CuboidCollider, CylinderCollider, RigidBody,  } from '@react-three/rapier'
 import * as THREE from 'three'
-import { getPlanetPlacement } from '../../world/planetPlacement'
 
 const MODEL_PATH = '/models/house.glb'
-const placement = getPlanetPlacement([0, 1, 0.25], THREE.MathUtils.degToRad(-20), -2)
+const POSITION: [number, number, number] = [-10, -1.9, 50]
+const ROTATION: [number, number, number] = [0, THREE.MathUtils.degToRad(-20), 0]
 
 function House() {
     const { scene } = useGLTF(MODEL_PATH)
@@ -20,8 +20,8 @@ function House() {
         <RigidBody
             type="fixed"
             colliders={false}
-            position={placement.position}
-            rotation={placement.rotation}
+            position={POSITION}
+            rotation={ROTATION}
             scale={0.75}
         >
             <CylinderCollider args={[9, 12]} position={[0, 10, 0]} />

@@ -48,7 +48,7 @@ function Monster({ position }: { position?: [number, number, number] }) {
 
             <RigidBody type="fixed" colliders={false}>
                 <BallCollider
-                    args={[60]}
+                    args={[70]}
                     sensor
                     onIntersectionEnter={() =>  runSequence()}
                 />

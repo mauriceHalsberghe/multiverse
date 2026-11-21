@@ -1,11 +1,12 @@
 import { useGLTF } from '@react-three/drei'
 import { CuboidCollider, CylinderCollider, RigidBody,  } from '@react-three/rapier'
 import * as THREE from 'three'
-import { getPlanetPlacement } from '../../world/planetPlacement'
 import PoiLabel from '../PoiLabel'
+import CantinaMusic from './CantinaMusic'
 
 const MODEL_PATH = '/models/cantina.glb'
-const placement = getPlanetPlacement([-1, -1, -6], THREE.MathUtils.degToRad(100), -3)
+const POSITION: [number, number, number] = [-240, 1, -80]
+const ROTATION: [number, number, number] = [0, THREE.MathUtils.degToRad(100), 0]
 
 function Cantina() {
     const { scene } = useGLTF(MODEL_PATH)
@@ -21,8 +22,8 @@ function Cantina() {
         <RigidBody
             type="fixed"
             colliders={false}
-            position={placement.position}
-            rotation={placement.rotation}
+            position={POSITION}
+            rotation={ROTATION}
             scale={0.65}
         >
             <CylinderCollider args={[9, 13]} position={[3, 10, 19]} />
@@ -34,7 +35,9 @@ function Cantina() {
 
             <primitive object={scene} />
 
-            <PoiLabel text="Sarlacc Pit" position={[0, 25, 0]} />
+            <CantinaMusic/>
+
+            <PoiLabel text="Cantina" position={[0, 25, 0]} />
 
         </RigidBody>
     )

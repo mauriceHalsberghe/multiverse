@@ -1,21 +1,22 @@
+import Barrel from "../../props/Barrel";
 import PoiLabel from "../PoiLabel";
 import House from "./House";
 import Tower from "./Tower";
-import { getPlanetPlacement } from "../../world/planetPlacement";
-
-const homesteadCenterDirection: [number, number, number] = [0.0125, 1.1, 0.15]
-const labelPosition = getPlanetPlacement(homesteadCenterDirection, 0, 10).position
 
 function Homestead() {
 
     return (
         <>
-            <PoiLabel text="Lars Homestead" position={labelPosition} />
+            <PoiLabel text="Lars Homestead" position={[0, 22, 20]} />
 
             <House />
-            <Tower surfaceDirection={[0.2, 1, 0]} />
-            <Tower surfaceDirection={[0.1, 0.45, 0.1]} />
-            <Tower surfaceDirection={[-0.25, 2, 0.25]} />
+            <Tower position={[-30, 0.75, 20]} />
+            <Tower position={[35, -1.3, 18]} />
+            <Tower position={[20, 0, 50]} />
+
+            <Barrel position={[-16, 2, 36]} />
+            <Barrel position={[-15, 2, 33]} />
+            <Barrel position={[-18, 2, 33]} />
         </>
     )
 }
