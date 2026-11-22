@@ -10,6 +10,7 @@ import Homestead from './pois/homestead/Homestead'
 import SarlaccPit from './pois/sarlacc-pit/SarlaccPit'
 import Cantina from './pois/cantina/Cantina'
 import R2Unit from './props/R2Unit'
+import EscapePod from './props/EscapePod'
 
 function Experience({
     orbitControlsEnabled,
@@ -32,9 +33,11 @@ function Experience({
 
                 <Homestead />
                 <SarlaccPit />
-                <Cantina debugEnabled={debugEnabled} />
+                <Cantina />
 
                 <R2Unit />
+
+                <EscapePod />
 
             </Physics>
             <Lighting target={vehiclePosition} />
