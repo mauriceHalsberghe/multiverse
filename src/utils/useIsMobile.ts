@@ -1,7 +1,11 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
+import { useUIStore } from "../store/useUIStore";
 
 export function useIsMobile(breakpointPx = 768): boolean {
-  const getIsMobile = () => {
+  const isMobile = useUIStore((state) => state.isMobile);
+  const setIsMobile = useUIStore((state) => state.setIsMobile);
+
+  const getIsMobile = useCallback(() => {
     if (typeof window === "undefined") return false;
 
     const isSmallScreen = window.matchMedia(
@@ -13,9 +17,7 @@ export function useIsMobile(breakpointPx = 768): boolean {
     );
 
     return isSmallScreen && (isCoarsePointer || isMobileUA);
-  };
-
-  const [isMobile, setIsMobile] = useState<boolean>(getIsMobile);
+  }, [breakpointPx]);
 
   useEffect(() => {
     const mq = window.matchMedia(`(max-width: ${breakpointPx}px)`);
@@ -24,7 +26,7 @@ export function useIsMobile(breakpointPx = 768): boolean {
     update();
     mq.addEventListener("change", update);
     return () => mq.removeEventListener("change", update);
-  }, [breakpointPx]);
+  }, [breakpointPx, getIsMobile, setIsMobile]);
 
   return isMobile;
 }

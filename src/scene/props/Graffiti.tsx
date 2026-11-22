@@ -1,11 +1,12 @@
 import { PositionalAudio, useTexture } from '@react-three/drei'
-import { Suspense, useEffect, useRef, useState } from 'react';
+import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { DoubleSide, SRGBColorSpace } from 'three'
 import { isPlayer } from '../../utils/useIsPlayer';
 import { BallCollider } from '@react-three/rapier';
 import PoiLabel from '../pois/PoiLabel';
 import * as THREE from 'three';
 import GraffitiAudioUrl from '../../audio/SprayPaint.mp3';
+import { useUIStore } from '../../store/useUIStore';
 
 type GraffitiProps = {
     position: [number, number, number]
@@ -19,25 +20,42 @@ function Graffiti({position, scale, colliderScale = 15, rotateY = 0, image}: Gra
     const texture = useTexture(image, (texture) => {
         texture.colorSpace = SRGBColorSpace
     })
-    const [showLabel, setShowLabel] = useState(false);
+    const isMobile = useUIStore((state) => state.isMobile)
+    const isGraffitiNearby = useUIStore((state) => state.isGraffitiNearby)
+    const setIsGraffitiNearby = useUIStore((state) => state.setIsGraffitiNearby)
+    const graffitiSprayRequestCount = useUIStore((state) => state.graffitiSprayRequestCount)
     const [showGraffiti, setShowGraffiti] = useState(false);
     const sound = useRef<THREE.PositionalAudio>(null)
 
+    const sprayGraffiti = useCallback(() => {
+        if (!isGraffitiNearby || showGraffiti) return
+        setShowGraffiti(true)
+        setIsGraffitiNearby(false)
+        if (sound.current && !sound.current.isPlaying) {
+            sound.current.play()
+        }
+    }, [isGraffitiNearby, setIsGraffitiNearby, showGraffiti])
+
     useEffect(() => {
-        if (!showLabel) return
+        if (isMobile || !isGraffitiNearby) return
 
         const handleKeyDown = (event: KeyboardEvent) => {
             if ((event.key === 'e' || event.key === 'E') && !event.repeat) {
-                setShowGraffiti(true)
-                if (sound.current) {
-                    sound.current.play()
-                }
+                sprayGraffiti()
             }
         }
 
         window.addEventListener('keydown', handleKeyDown)
         return () => window.removeEventListener('keydown', handleKeyDown)
-    }, [showLabel])
+    }, [isMobile, isGraffitiNearby, sprayGraffiti])
+
+    const handledSprayRequestCount = useRef(graffitiSprayRequestCount)
+    
+    useEffect(() => {
+        if (graffitiSprayRequestCount === handledSprayRequestCount.current) return
+        handledSprayRequestCount.current = graffitiSprayRequestCount
+        sprayGraffiti()
+    }, [graffitiSprayRequestCount, sprayGraffiti])
         
 
     return (
@@ -49,10 +67,10 @@ function Graffiti({position, scale, colliderScale = 15, rotateY = 0, image}: Gra
                 position={position} 
                 sensor 
                 onIntersectionEnter={(payload) => {
-                    if (isPlayer(payload))setShowLabel(true)
+                    if (isPlayer(payload) && !showGraffiti) setIsGraffitiNearby(true)
                 }}
                 onIntersectionExit={(payload) => {
-                    if (isPlayer(payload))setShowLabel(false)
+                    if (isPlayer(payload)) setIsGraffitiNearby(false)
                 }}
             />
 
@@ -64,8 +82,8 @@ function Graffiti({position, scale, colliderScale = 15, rotateY = 0, image}: Gra
                 autoplay={false}
             />
 
-            {showLabel && !showGraffiti &&
-                <PoiLabel text="Press E to spray graffiti" position={position} />
+            {isGraffitiNearby && !showGraffiti &&
+                <PoiLabel text={isMobile ? 'Press Spray to spray graffiti' : 'Press E to spray graffiti'} position={position} />
             }
 
             {showGraffiti &&
