@@ -74,3 +74,8 @@
 - Idle too long: tumbleweed
 - Hit the Sarlacc 5x: it burps out a boot
 - Secrets counter ("3 of 8 found")
+
+
+## Credits
+
+https://www.sergent-tobogo.com/tee-shirt/star-wars-haring/

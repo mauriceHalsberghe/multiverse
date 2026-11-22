@@ -1,10 +1,11 @@
 import { PositionalAudio, useAnimations, useGLTF } from '@react-three/drei'
-import { BallCollider, CapsuleCollider, RigidBody, type IntersectionEnterPayload, type IntersectionExitPayload,  } from '@react-three/rapier'
+import { BallCollider, CapsuleCollider, RigidBody } from '@react-three/rapier'
 import * as THREE from 'three'
 import PoiLabel from '../pois/PoiLabel'
 import { useRef, useState } from 'react'
 import R2AudioUrl from '../../audio/R2D2.mp3'
 import SandPile from './SandPile'
+import { isPlayer } from '../../utils/useIsPlayer'
 
 
 const MODEL_PATH = '/models/r2_unit.glb'
@@ -38,7 +39,6 @@ function R2Unit() {
         }
         
     }
-
 
     return (
         <RigidBody
@@ -80,8 +80,7 @@ function R2Unit() {
     )
 }
 
-const isPlayer = (payload: IntersectionEnterPayload | IntersectionExitPayload) =>
-    payload.other.rigidBodyObject?.name === 'player'
+
 
 useGLTF.preload(MODEL_PATH)
 

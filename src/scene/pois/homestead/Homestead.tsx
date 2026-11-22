@@ -17,6 +17,7 @@ function Homestead() {
             <Barrel position={[-16, 2, 36]} />
             <Barrel position={[-15, 2, 33]} />
             <Barrel position={[-18, 2, 33]} />
+
         </>
     )
 }

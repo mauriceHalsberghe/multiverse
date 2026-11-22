@@ -5,6 +5,9 @@ import PoiLabel from '../PoiLabel'
 import CantinaMusic from './CantinaMusic'
 import Barrel from '../../props/Barrel'
 
+import graffitiImage from '../../../assets/graffiti/graffiti_1.png'
+import Graffiti from '../../props/Graffiti'
+
 const MODEL_PATH = '/models/cantina.glb'
 const POSITION: [number, number, number] = [-240, 1, -80]
 const ROTATION: [number, number, number] = [0, THREE.MathUtils.degToRad(100), 0]
@@ -12,12 +15,15 @@ const ROTATION: [number, number, number] = [0, THREE.MathUtils.degToRad(100), 0]
 function Cantina() {
     const { scene } = useGLTF(MODEL_PATH)
 
+
     scene.traverse((object) => {
         if ((object as THREE.Mesh).isMesh) {
             object.castShadow = true
             object.receiveShadow = true
         }
     })
+
+
 
     return (
         <RigidBody
@@ -42,6 +48,8 @@ function Cantina() {
             <Barrel position={[-12, 4, -26]} scale={0.8 / 0.65}/>
 
             <PoiLabel text="Cantina" position={[0, 25, 0]} />
+
+            <Graffiti position={[-5, 8, -27]} scale={[7.2, 10.5]} colliderScale={20} rotateY={- Math.PI / 2} image={graffitiImage}/>
 
         </RigidBody>
     )
