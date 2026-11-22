@@ -11,8 +11,8 @@ import SarlaccPit from './pois/sarlacc-pit/SarlaccPit'
 import Cantina from './pois/cantina/Cantina'
 import R2Unit from './props/R2Unit'
 import EscapePod from './props/EscapePod'
-import Shrubs from './props/Shrubs'
 import { useGLTF } from '@react-three/drei'
+import ShrubScatter from './props/ShrubScatter'
 
 function Experience({
     orbitControlsEnabled,
@@ -41,7 +41,7 @@ function Experience({
 
                 <R2Unit />
                 <EscapePod />
-                <Shrubs vehiclePosition={vehiclePosition} ground={groundScene} />
+                <ShrubScatter vehiclePosition={vehiclePosition} ground={groundScene} />
 
             </Physics>
             <Lighting target={vehiclePosition} />

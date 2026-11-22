@@ -8,7 +8,7 @@ import SandPile from './SandPile'
 
 
 const MODEL_PATH = '/models/r2_unit.glb'
-const POSITION: [number, number, number] = [-100, 1.25, 120]
+const POSITION: [number, number, number] = [-100, 1.25, 140]
 const ROTATION: [number, number, number] = [0.5, -0.5, 0.2]
 
 function R2Unit() {

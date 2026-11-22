@@ -39,6 +39,7 @@ function Cantina() {
 
             <Barrel position={[-5, 4, 34]} scale={0.8 / 0.65}/>
             <Barrel position={[-10, 4, 32]} scale={0.8 / 0.65}/>
+            <Barrel position={[-12, 4, -26]} scale={0.8 / 0.65}/>
 
             <PoiLabel text="Cantina" position={[0, 25, 0]} />
 

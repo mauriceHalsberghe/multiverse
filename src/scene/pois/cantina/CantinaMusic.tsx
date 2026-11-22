@@ -4,7 +4,7 @@ import { PositionalAudio } from '@react-three/drei'
 import cantinaAudioUrl from '../../../audio/CantinaBand.mp3'
 
 const REF = 20
-const MAX = 70 
+const MAX = 80
 
 export default function CantinaMusic() {
     const audio = useRef<THREE.PositionalAudio>(null)
