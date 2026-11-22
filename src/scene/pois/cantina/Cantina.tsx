@@ -7,6 +7,7 @@ import Barrel from '../../props/Barrel'
 
 import graffitiImage from '../../../assets/graffiti/graffiti_1.png'
 import Graffiti from '../../props/Graffiti'
+import Crate from '../../props/Crate'
 
 const MODEL_PATH = '/models/cantina.glb'
 const POSITION: [number, number, number] = [-240, 1, -80]
@@ -22,8 +23,6 @@ function Cantina() {
             object.receiveShadow = true
         }
     })
-
-
 
     return (
         <RigidBody
@@ -47,9 +46,20 @@ function Cantina() {
             <Barrel position={[-10, 4, 32]} scale={0.8 / 0.65}/>
             <Barrel position={[-12, 4, -26]} scale={0.8 / 0.65}/>
 
+            <Crate position={[23, 2, -10]}/>
+            <Crate position={[21, 2, -14]} rotation={[0, 2, 0]}/>
+            <Crate position={[23, 2, -18]} rotation={[0, 1, 0]}/>
+
             <PoiLabel text="Cantina" position={[0, 25, 0]} />
 
-            <Graffiti position={[-5, 8, -27]} scale={[7.2, 10.5]} colliderScale={20} rotateY={- Math.PI / 2} image={graffitiImage}/>
+            <Graffiti 
+                position={[-5, 8, -27]}
+                scale={[7.2, 10.5]} 
+                colliderScale={15}
+                colliderPosition={[-10, 8, -27]}
+                rotateY={- Math.PI / 2}
+                image={graffitiImage}
+            />
 
         </RigidBody>
     )

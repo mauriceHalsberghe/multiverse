@@ -7,9 +7,8 @@ import R2AudioUrl from '../../audio/R2D2.mp3'
 import SandPile from './SandPile'
 import { isPlayer } from '../../utils/useIsPlayer'
 
-
 const MODEL_PATH = '/models/r2_unit.glb'
-const POSITION: [number, number, number] = [-100, 1.25, 140]
+const POSITION: [number, number, number] = [-100, 1.75, 140]
 const ROTATION: [number, number, number] = [0.5, -0.5, 0.2]
 
 function R2Unit() {
@@ -69,7 +68,7 @@ function R2Unit() {
                 autoplay={false}
             />
 
-            <SandPile position={[0, 0.5, 0]} scale={0.5} rotation={[-0.4, 1, 0]} />
+            <SandPile position={[0, -0.25, 0]} scale={0.5} rotation={[-0.4, 1, 0]} />
 
             {showLabel && 
                 <PoiLabel text="These are not the droids you're looking for..." position={[0, 10, 0]}/>
@@ -79,8 +78,6 @@ function R2Unit() {
         </RigidBody>
     )
 }
-
-
 
 useGLTF.preload(MODEL_PATH)
 

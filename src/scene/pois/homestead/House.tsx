@@ -1,6 +1,8 @@
 import { useGLTF } from '@react-three/drei'
 import { CuboidCollider, CylinderCollider, RigidBody,  } from '@react-three/rapier'
 import * as THREE from 'three'
+import graffitiImage from '../../../assets/graffiti/graffiti_4.png'
+import Graffiti from '../../props/Graffiti'
 
 const MODEL_PATH = '/models/house.glb'
 const POSITION: [number, number, number] = [-10, -1.9, 50]
@@ -30,6 +32,16 @@ function House() {
             <CuboidCollider args={[6, 4, 4]} position={[0, 6, -11]} />
 
             <primitive object={scene} />
+
+             <Graffiti 
+                position={[14.5, 7.5, 0]} 
+                scale={[7, 7]} 
+                colliderScale={11} 
+                colliderPosition={[20, 7, 0]}
+                rotateY={- Math.PI / 2} 
+                image={graffitiImage}
+            />
+
         </RigidBody>
     )
 }

@@ -12,11 +12,12 @@ type GraffitiProps = {
     position: [number, number, number]
     scale: [number, number];
     colliderScale?: number;
+    colliderPosition?: [number, number, number]
     rotateY? :number;
     image: string;
 }
 
-function Graffiti({position, scale, colliderScale = 15, rotateY = 0, image}: GraffitiProps) {
+function Graffiti({position, scale, colliderPosition = position, colliderScale = 15, rotateY = 0, image}: GraffitiProps) {
     const texture = useTexture(image, (texture) => {
         texture.colorSpace = SRGBColorSpace
     })
@@ -60,11 +61,10 @@ function Graffiti({position, scale, colliderScale = 15, rotateY = 0, image}: Gra
 
     return (
         <group >
-
-
+            
             <BallCollider
                 args={[colliderScale]} 
-                position={position} 
+                position={colliderPosition} 
                 sensor 
                 onIntersectionEnter={(payload) => {
                     if (isPlayer(payload) && !showGraffiti) setIsGraffitiNearby(true)
