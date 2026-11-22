@@ -11,6 +11,8 @@ import SarlaccPit from './pois/sarlacc-pit/SarlaccPit'
 import Cantina from './pois/cantina/Cantina'
 import R2Unit from './props/R2Unit'
 import EscapePod from './props/EscapePod'
+import Shrubs from './props/Shrubs'
+import { useGLTF } from '@react-three/drei'
 
 function Experience({
     orbitControlsEnabled,
@@ -20,6 +22,8 @@ function Experience({
     debugEnabled: boolean
 }) {
     const vehiclePosition = useRef(new THREE.Vector3(0, 2, 0))
+    const { scene: groundScene } = useGLTF('/models/desert_floor.glb')
+
 
     return (
         <Suspense fallback={null}>
@@ -36,8 +40,8 @@ function Experience({
                 <Cantina />
 
                 <R2Unit />
-
                 <EscapePod />
+                <Shrubs vehiclePosition={vehiclePosition} ground={groundScene} />
 
             </Physics>
             <Lighting target={vehiclePosition} />

@@ -24,7 +24,6 @@ function Monster({ position }: { position?: [number, number, number] }) {
         }
     })
 
-
     useEffect(() => {
         playClip(actions, currentAction, 'IdleDown', true)
     }, [actions])

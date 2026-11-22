@@ -35,6 +35,7 @@ function Landspeeder({
             position={START_POSITION}
             scale={0.9}
             mass={20}
+            name='player'
         >
             <CuboidCollider
                 args={[2.5, 2, 6]}
