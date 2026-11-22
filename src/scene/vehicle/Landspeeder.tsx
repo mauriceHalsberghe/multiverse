@@ -34,6 +34,7 @@ function Landspeeder({
             angularDamping={8}
             position={START_POSITION}
             scale={0.9}
+            mass={20}
         >
             <CuboidCollider
                 args={[2.5, 2, 6]}

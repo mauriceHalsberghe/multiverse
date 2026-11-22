@@ -3,6 +3,7 @@ import { CuboidCollider, CylinderCollider, RigidBody,  } from '@react-three/rapi
 import * as THREE from 'three'
 import PoiLabel from '../PoiLabel'
 import CantinaMusic from './CantinaMusic'
+import Barrel from '../../props/Barrel'
 
 const MODEL_PATH = '/models/cantina.glb'
 const POSITION: [number, number, number] = [-240, 1, -80]
@@ -27,7 +28,6 @@ function Cantina() {
             scale={0.65}
         >
             <CylinderCollider args={[9, 13]} position={[3, 10, 19]} />
-            
             <CuboidCollider args={[22, 10, 18]} position={[-5, 6, -1]} />
             <CuboidCollider args={[11, 10, 11]} position={[6, 6, -26]} />
             <CuboidCollider args={[4, 10, 4]} position={[21, 6, -2]} />
@@ -36,6 +36,9 @@ function Cantina() {
             <primitive object={scene} />
 
             <CantinaMusic/>
+
+            <Barrel position={[-5, 4, 34]} scale={0.8 / 0.65}/>
+            <Barrel position={[-10, 4, 32]} scale={0.8 / 0.65}/>
 
             <PoiLabel text="Cantina" position={[0, 25, 0]} />
 

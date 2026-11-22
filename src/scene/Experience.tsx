@@ -9,6 +9,7 @@ import { Suspense } from 'react'
 import Homestead from './pois/homestead/Homestead'
 import SarlaccPit from './pois/sarlacc-pit/SarlaccPit'
 import Cantina from './pois/cantina/Cantina'
+import R2Unit from './props/R2Unit'
 
 function Experience({
     orbitControlsEnabled,
@@ -31,7 +32,9 @@ function Experience({
 
                 <Homestead />
                 <SarlaccPit />
-                <Cantina />
+                <Cantina debugEnabled={debugEnabled} />
+
+                <R2Unit />
 
             </Physics>
             <Lighting target={vehiclePosition} />

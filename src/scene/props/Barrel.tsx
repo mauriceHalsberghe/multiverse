@@ -7,9 +7,10 @@ const MODEL_PATH = '/models/barrel.glb'
 
 type BarrelProps = {
     position: [number, number, number]
+    scale?: number;
 }
 
-function Barrel({ position }: BarrelProps) {
+function Barrel({ position, scale = 0.8 }: BarrelProps) {
 
     const { scene } = useGLTF(MODEL_PATH)
     const barrel = useMemo(() => {
@@ -29,7 +30,7 @@ function Barrel({ position }: BarrelProps) {
             colliders={false}
             friction={15}
             mass={20}
-            scale={0.8}
+            scale={scale}
         >
 
             <CylinderCollider args={[2.1, 1.5]} position={[0, 0.15, 0]} />
