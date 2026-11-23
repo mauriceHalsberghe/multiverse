@@ -1,6 +1,5 @@
 ## Landmarks
 
-- Mos Eisley Cantina (swinging door, neon sign)
 - Mos Eisley Spaceport / Docking Bay 94 (steam vents)
 - Jabba's Palace (lifting door)
 - Sandcrawler (circles the planet, lowering ramp)
@@ -13,13 +12,10 @@
 - Beggar's Canyon rock arch
 - Pod racer start line (dropping gate)
 - Mushroom rocks / hoodoos (tippable caps)
-- Power droid / R2 wreck (sparks)
-- Crashed escape pod (smoke, hatch pops open)
 - Womp rat burrow (wiggling tail)
 - Speeder graveyard (pushable wrecks)
 - Dewback skeleton / sleeping dewback
 - Rolling boulders near the canyon
-- Stacked cargo crates at the spaceport
 
 ## Minigame ideas (Rapier)
 
@@ -28,14 +24,12 @@
 - Droid dominoes
 - Cargo run (balance crates on the speeder)
 - Jawa scrap collection
-- Canyon jump challenge
 - Boulder roll to target
 
 ## Easter eggs
 
 ### Star Wars
 
-- "These aren't the droids" buried R2 unit
 - Twin suns (stand still at sunset)
 - Tiny Death Star orbiting the planet
 - Blue milk carton on the homestead

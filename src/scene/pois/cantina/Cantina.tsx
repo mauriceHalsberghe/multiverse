@@ -8,6 +8,8 @@ import Barrel from '../../props/Barrel'
 import graffitiImage from '../../../assets/graffiti/graffiti_1.png'
 import Graffiti from '../../props/Graffiti'
 import Crate from '../../props/Crate'
+import { useFrame } from '@react-three/fiber'
+import { useEffect, useRef } from 'react'
 
 const MODEL_PATH = '/models/cantina.glb'
 const POSITION: [number, number, number] = [-240, 1, -80]
@@ -15,13 +17,35 @@ const ROTATION: [number, number, number] = [0, THREE.MathUtils.degToRad(100), 0]
 
 function Cantina() {
     const { scene } = useGLTF(MODEL_PATH)
+    const windowMat = useRef<THREE.MeshStandardMaterial | null>(null)
 
+    useEffect(() => {
+        scene.traverse((object) => {
+            const mesh = object as THREE.Mesh
+            if (!mesh.isMesh) return
 
-    scene.traverse((object) => {
-        if ((object as THREE.Mesh).isMesh) {
-            object.castShadow = true
-            object.receiveShadow = true
-        }
+            mesh.castShadow = true
+            mesh.receiveShadow = true
+
+            const material = mesh.material as THREE.MeshStandardMaterial
+            if (material.name === 'Cantina_window') {
+                material.toneMapped = false
+                windowMat.current = material
+            }
+        })
+    }, [scene])
+
+    useFrame(({ clock }) => {
+        const material = windowMat.current
+        if (!material) return
+
+        const time = clock.elapsedTime
+        const hue = (time / 2) % 1;
+        const beatsPerSecond = 130/60; // 130 bpm (cantina song)
+        const pulse = 0.05 + 1 * ((Math.sin(time * 2 * Math.PI * beatsPerSecond) + 1) / 2)
+
+        material.emissive.setHSL(hue, 0.8, 0.4)
+        material.emissiveIntensity = 2 * pulse
     })
 
     return (

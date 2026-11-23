@@ -6,7 +6,7 @@ import useVehicleControls from './useVehicleControls'
 import { useAudioUnlock } from '../../utils/useAudioUnlock'
 
 const SOUND_TOP_SPEED = 50 // speed that counts as full throttle for the pitch
-const MIN_RATE = 0 // pitch at the lowest speed
+const MIN_RATE = 0.5 // keep the engine audible while steering at a standstill
 const MAX_RATE = 1.5 // playback pitch at top speed
 const MAX_VOLUME = 0.15 // volume while the button is held
 const MIN_CUTOFF = 600 // low-pass at standstill (duller)

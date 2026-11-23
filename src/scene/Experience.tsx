@@ -13,6 +13,7 @@ import R2Unit from './props/R2Unit'
 import EscapePod from './props/EscapePod'
 import { useGLTF } from '@react-three/drei'
 import ShrubScatter from './props/ShrubScatter'
+import Effects from './Effects'
 
 function Experience({
     orbitControlsEnabled,
@@ -44,7 +45,10 @@ function Experience({
                 <ShrubScatter vehiclePosition={vehiclePosition} ground={groundScene} />
 
             </Physics>
-            <Lighting target={vehiclePosition} />
+
+            <Lighting target={vehiclePosition} debugEnabled={debugEnabled} />
+            <Effects/>
+
         </Suspense>
     )
 }

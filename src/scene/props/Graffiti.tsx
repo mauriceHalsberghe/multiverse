@@ -22,15 +22,16 @@ function Graffiti({position, scale, colliderPosition = position, colliderScale =
         texture.colorSpace = SRGBColorSpace
     })
     const isMobile = useUIStore((state) => state.isMobile)
-    const isGraffitiNearby = useUIStore((state) => state.isGraffitiNearby)
     const setIsGraffitiNearby = useUIStore((state) => state.setIsGraffitiNearby)
     const graffitiSprayRequestCount = useUIStore((state) => state.graffitiSprayRequestCount)
+    const [isGraffitiNearby, setIsGraffitiNearbyLocal] = useState(false);
     const [showGraffiti, setShowGraffiti] = useState(false);
     const sound = useRef<THREE.PositionalAudio>(null)
 
     const sprayGraffiti = useCallback(() => {
         if (!isGraffitiNearby || showGraffiti) return
         setShowGraffiti(true)
+        setIsGraffitiNearbyLocal(false)
         setIsGraffitiNearby(false)
         if (sound.current && !sound.current.isPlaying) {
             sound.current.play()
@@ -67,10 +68,16 @@ function Graffiti({position, scale, colliderPosition = position, colliderScale =
                 position={colliderPosition} 
                 sensor 
                 onIntersectionEnter={(payload) => {
-                    if (isPlayer(payload) && !showGraffiti) setIsGraffitiNearby(true)
+                    if (isPlayer(payload) && !showGraffiti) {
+                        setIsGraffitiNearbyLocal(true)
+                        setIsGraffitiNearby(true)
+                    }
                 }}
                 onIntersectionExit={(payload) => {
-                    if (isPlayer(payload)) setIsGraffitiNearby(false)
+                    if (isPlayer(payload)) {
+                        setIsGraffitiNearbyLocal(false)
+                        setIsGraffitiNearby(false)
+                    }
                 }}
             />
 
