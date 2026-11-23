@@ -46,9 +46,9 @@ function Cantina() {
             <Barrel position={[-10, 4, 32]} scale={0.8 / 0.65}/>
             <Barrel position={[-12, 4, -26]} scale={0.8 / 0.65}/>
 
-            <Crate position={[23, 2, -10]}/>
-            <Crate position={[21, 2, -14]} rotation={[0, 2, 0]}/>
-            <Crate position={[23, 2, -18]} rotation={[0, 1, 0]}/>
+            <Crate position={[23, 2, -10]} rotation={[0, -0.25, 0]}scale={1 / 0.65}/>
+            <Crate position={[21, 2, -17]} rotation={[0, 2, 0]} scale={1 / 0.65}/>
+            <Crate position={[23, 2, -23]} rotation={[0, 1, 0]} scale={1 / 0.65}/>
 
             <PoiLabel text="Cantina" position={[0, 25, 0]} />
 

@@ -16,9 +16,9 @@ function Homestead() {
             <Tower position={[35, -1.3, 18]} />
             <Tower position={[20, 0, 50]} />
 
-            <Barrel position={[-16, 2, 36]} />
-            <Barrel position={[-15, 2, 33]} />
-            <Barrel position={[-18, 2, 33]} />
+            <Barrel position={[-16, 2.5, 36]} />
+            <Barrel position={[-15, 2.5, 33]} />
+            <Barrel position={[-18, 2.5, 33]} />
 
             <Crate position={[-20, 1, 38]}/>
             <Crate position={[-6, 1, 62]}/>

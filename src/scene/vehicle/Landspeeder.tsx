@@ -4,9 +4,13 @@ import { useGLTF } from '@react-three/drei'
 import { CuboidCollider, RapierRigidBody, RigidBody } from '@react-three/rapier'
 import useFollowCamera from './useFollowCamera'
 import useVehicleDrive from './useVehicleDrive'
+import useEngineSound from './useEngineSound'
+
 
 const MODEL_PATH = '/models/landspeeder.glb'
 const START_POSITION: [number, number, number] = [4, 1, 0]
+
+const ENGINE_SOUND = '/audio/hover_engine.wav'
 
 function Landspeeder({
     orbitControlsEnabled,
@@ -20,6 +24,7 @@ function Landspeeder({
 
     useVehicleDrive(body, vehiclePosition)
     useFollowCamera(!orbitControlsEnabled, body)
+    useEngineSound(body, ENGINE_SOUND)
 
     scene.traverse((object) => {
         if ((object as THREE.Mesh).isMesh) object.castShadow = true
@@ -33,6 +38,7 @@ function Landspeeder({
             linearDamping={2}
             angularDamping={8}
             position={START_POSITION}
+            rotation={[0, -0.25, 0]}
             scale={0.9}
             mass={20}
             name='player'

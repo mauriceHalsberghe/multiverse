@@ -11,7 +11,7 @@ type CrateProps = {
     scale?: number;
 }
 
-function Crate({ position, rotation = [0, 0, 0] }: CrateProps) {
+function Crate({ position, scale = 1, rotation = [0, 0, 0] }: CrateProps) {
 
     const { scene } = useGLTF(MODEL_PATH)
     
@@ -33,6 +33,7 @@ function Crate({ position, rotation = [0, 0, 0] }: CrateProps) {
             colliders={false}
             friction={50}
             mass={50}
+            scale={scale}
             gravityScale={2}
         >
             <CuboidCollider args={[1.5, 1.5, 1.5]} position={[0, 1.5, 0]} />
