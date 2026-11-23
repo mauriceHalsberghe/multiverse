@@ -1,12 +1,13 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
-import { useGLTF, useAnimations } from '@react-three/drei'
+import { useGLTF, useAnimations, PositionalAudio } from '@react-three/drei'
 import { BallCollider, RigidBody } from '@react-three/rapier'
+
+import MonsterAudioUrl from '../../../audio/Sarlacc.mp3';
 
 const MODEL_PATH = '/models/sarlacc.glb'
 
 type Actions = Record<string, THREE.AnimationAction | null>
-
 const wait = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
 
@@ -16,6 +17,7 @@ function Monster({ position }: { position?: [number, number, number] }) {
     const { actions } = useAnimations(animations, group)
     const busy = useRef(false)
     const currentAction = useRef<THREE.AnimationAction | null>(null)
+    const sound = useRef<THREE.PositionalAudio>(null)
 
     scene.traverse((object) => {
         if ((object as THREE.Mesh).isMesh) {
@@ -31,6 +33,10 @@ function Monster({ position }: { position?: [number, number, number] }) {
     const runSequence = async () => {
         if (busy.current) return
         busy.current = true
+
+        if (sound.current && !sound.current.isPlaying) {
+            sound.current.play()
+        }
 
         await wait(playClip(actions, currentAction, 'MouthSnap', false))
         playClip(actions, currentAction, 'Idle', true)
@@ -52,6 +58,15 @@ function Monster({ position }: { position?: [number, number, number] }) {
                     onIntersectionEnter={() =>  runSequence()}
                 />
             </RigidBody>
+
+            
+            <PositionalAudio
+                ref={sound}
+                url={MonsterAudioUrl}
+                distance={10}
+                loop={false}
+                autoplay={false}
+            />
         </group>
     )
 }
