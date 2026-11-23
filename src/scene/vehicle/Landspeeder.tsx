@@ -29,7 +29,10 @@ function Landspeeder({
     useBoostGlow(scene)
 
     scene.traverse((object) => {
-        if ((object as THREE.Mesh).isMesh) object.castShadow = true
+        if ((object as THREE.Mesh).isMesh) {
+            object.castShadow = true
+            object.receiveShadow = true
+        }
     })
 
     return (

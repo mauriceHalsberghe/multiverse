@@ -1,4 +1,3 @@
-// useBoostGlow.ts
 import { useEffect, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
 import * as THREE from 'three'
@@ -16,17 +15,29 @@ function useBoostGlow(scene: THREE.Object3D) {
         boostRight.current = scene.getObjectByName('Boost_right') ?? null
     }, [scene])
 
-    useFrame(() => {
+    useFrame((_, delta) => {
         if (!boostCenter.current || !boostLeft.current || !boostRight.current) return
 
         const { throttle, steer } = getControls()
 
-        console.log(steer);
+        const fade = (object: THREE.Object3D, visible: boolean) => {
+            object.traverse(child => {
+                if ((child as THREE.Mesh).isMesh) {
+                    const material = (child as THREE.Mesh).material as THREE.MeshStandardMaterial
+                    material.transparent = true
+                    material.opacity = THREE.MathUtils.damp(
+                        material.opacity,
+                        visible ? 1 : 0,
+                        8,
+                        delta
+                    )
+                }
+            })
+        }
         
-        boostCenter.current.visible = throttle !== 0
-
-        boostLeft.current.visible =  steer < 0 || throttle !== 0
-        boostRight.current.visible = steer > 0 || throttle !== 0
+        fade(boostCenter.current, throttle !== 0)
+        fade(boostLeft.current, steer < 0 || (throttle > 0 && steer === 0))
+        fade(boostRight.current, steer > 0 || (throttle > 0 && steer === 0))
     })
 }
 
