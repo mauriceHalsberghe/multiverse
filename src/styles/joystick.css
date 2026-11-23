@@ -1,14 +1,16 @@
 .mobile-controls {
     position: absolute;
     left: 50% !important;
-    bottom: 4rem !important;
+    bottom: 2rem !important;
     transform: translateX(-50%);
     z-index: 2;
     touch-action: none;
+    user-select: none;
 }
 
 .joystick-control {
     max-width: min-content;
+    user-select: none;
 }
 
 .graffiti-spray-button {
@@ -27,4 +29,5 @@
     font-weight: 600;
     font-weight: 600;
     touch-action: manipulation;
+    user-select: none;
 }
