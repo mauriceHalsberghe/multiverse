@@ -5,6 +5,7 @@ import { CuboidCollider, RapierRigidBody, RigidBody } from '@react-three/rapier'
 import useFollowCamera from './useFollowCamera'
 import useVehicleDrive from './useVehicleDrive'
 import useEngineSound from './useEngineSound'
+import useBoostGlow from './useBoostglow'
 
 
 const MODEL_PATH = '/models/landspeeder.glb'
@@ -25,6 +26,7 @@ function Landspeeder({
     useVehicleDrive(body, vehiclePosition)
     useFollowCamera(!orbitControlsEnabled, body)
     useEngineSound(body, ENGINE_SOUND)
+    useBoostGlow(scene)
 
     scene.traverse((object) => {
         if ((object as THREE.Mesh).isMesh) object.castShadow = true
