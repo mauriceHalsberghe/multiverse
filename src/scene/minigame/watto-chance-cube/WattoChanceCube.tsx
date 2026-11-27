@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import { useGameStore } from "../../../store/useGameStore";
-import ChanceCube from "./ChanceCube";
 import DiceTray from "./DiceTray";
-import DiceCamera from "./DieCamera";
 import * as THREE from 'three'
+import ChanceCube from "./ChanceCube/ChanceCube";
+import Workbench from "./Workbench";
+import DiceCamera from "./DiceCamera";
 
 const POSITION: [number, number, number] = [500, 0, 0]
 
@@ -24,9 +25,12 @@ function WattoChanceCube () {
 
     return (
         <group position={POSITION}>
-            <DiceTray />
+            <group ref={trayRef}>
+                <DiceTray />
+            </group>
             <ChanceCube />
             <DiceCamera trayRef={trayRef} closing={closing} onClosed={() => setGameMode('explore')} />
+            <Workbench />
         </group>
     )
 }

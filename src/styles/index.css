@@ -1,5 +1,6 @@
 @import url("./poi-label.css");
 @import url("./joystick.css");
+@import url("./dicegame.css");
 
 html,
 body,
@@ -26,4 +27,11 @@ body {
   z-index: 1;
   font: inherit;
   cursor: pointer;
+}
+
+@font-face {
+  font-family: 'StarJedi';
+  src: url('/fonts/StarJedi.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }

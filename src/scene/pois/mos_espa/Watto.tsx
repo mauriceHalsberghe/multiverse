@@ -24,17 +24,13 @@ function Watto() {
                 !event.repeat &&
                 showLabel
             ) {
-                console.log('dice');
-                
                 setGameMode("dice")
             }
         }
 
         window.addEventListener("keydown", handleKeyDown)
 
-        return () => {
-            window.removeEventListener("keydown", handleKeyDown)
-        }
+        return () =>  window.removeEventListener("keydown", handleKeyDown)
     }, [showLabel, setGameMode])
 
     useEffect(() => {
@@ -47,8 +43,6 @@ function Watto() {
     }, [scene])
 
     useEffect(() => {
-        console.log("available animations:", names)
-
         const action = actions["idle_fly"]
         if (!action) return
 

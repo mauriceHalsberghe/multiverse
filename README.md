@@ -56,9 +56,13 @@ npm run dev
 
 [Low-Poly Watto](https://skfb.ly/o6VGG) by pau.raurellgomis is licensed under CC Attribution
 
-- **Textures:** [Sources]
-- **Audio:** [Sources]
-- **Other Assets:** [Sources]
+### Textures:
+
+### Audio:
+
+### Other Assets:
+
+[Star Jedi Font](https://www.fontspace.com/star-jedi-font-f9641)
 
 ## Author
 

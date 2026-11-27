@@ -5,6 +5,8 @@ import Experience from './scene/Experience'
 import JoyStick from './ui/JoyStick'
 import { useIsMobile } from './utils/useIsMobile'
 import { useAudioUnlock } from './utils/useAudioUnlock'
+import { useGameStore } from './store/useGameStore'
+import DiceGame from './ui/DiceGame'
  
 
 function App() {
@@ -13,6 +15,8 @@ function App() {
     const showOrbitToggle = import.meta.env.DEV && debugEnabled
 
     const isMobile = useIsMobile();
+
+    const gameMode = useGameStore((state) => state.gameMode)
     useAudioUnlock()
 
     return (
@@ -48,6 +52,12 @@ function App() {
                     Orbit controls: {orbitControlsEnabled ? 'On' : 'Off'}
                 </button>
             )}
+
+            {gameMode == 'dice' && 
+                <DiceGame />
+            }
+
+            
         </div>
     )
 }

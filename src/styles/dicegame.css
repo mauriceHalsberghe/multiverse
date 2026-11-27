@@ -1,0 +1,115 @@
+.dicegame {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    user-select: none;
+    pointer-events: none;
+    color: white;
+    font-family: sans-serif;
+}
+
+.dicegame__header {
+    padding-top: 1rem;
+    h1 {
+        display: none;
+    }
+    img {
+        max-width: 38rem;
+    }
+    p {
+        text-align: center;
+        font-size: 2rem;
+        margin: 0;
+    }
+}
+
+.dicegame__stats {
+    position: absolute;
+    left: 5vw;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+.stat__label {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+.stat__value {
+    font-size: 5rem;
+    font-family: 'StarJedi';
+    line-height: 4rem;
+}
+
+.dicegame__history {
+    position: absolute;
+    right: 5vw;
+    top: 50%;
+    transform: translateY(-50%);
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    grid-auto-flow: column;
+    gap: 1rem 2rem;
+}
+
+.history {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 5rem;
+    border: #67503e 5px solid;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+.dicegame__buttons {
+    display: flex;
+    gap: 2rem;
+    position: absolute;
+    bottom: 2rem;
+}
+
+.choice {
+    font-size: 3rem;
+    width: 16rem;
+    padding: 1rem 0;
+    color: white;
+    pointer-events: all;
+    cursor: pointer;
+    border: #67503e 10px solid;
+    border-radius: 16rem;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    transition: all 150ms ease;
+    font-family: 'StarJedi';
+
+    &:hover {
+        border: hsl(26, 25%, 30%) 10px solid;
+    }
+
+    &:active {
+        transform: translateY(5px);
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+    }
+}
+
+.choice--red, .history--red {
+    background-color: #ac3939;
+}
+
+.choice--blue, .history--blue {
+    background-color: #3f3fab;
+}

@@ -1,6 +1,7 @@
 import { useGLTF } from '@react-three/drei'
 import {  RigidBody,  } from '@react-three/rapier'
-import * as THREE from 'three'
+import { useEffect } from 'react'
+import { configureShadows } from '../../../utils/configureShadows'
 
 const MODEL_PATH = '/models/mos_espa/dice_tray.glb'
 const POSITION: [number, number, number] = [0, 0, 0]
@@ -9,12 +10,9 @@ const ROTATION: [number, number, number] = [0, 0, 0]
 function DiceTray() {
     const { scene } = useGLTF(MODEL_PATH)
 
-    scene.traverse((object) => {
-        if ((object as THREE.Mesh).isMesh) {
-            object.castShadow = true
-            object.receiveShadow = true
-        }
-    })
+    useEffect(() => {
+        configureShadows(scene)
+    }, [scene])
 
     return (
         <RigidBody
@@ -22,7 +20,7 @@ function DiceTray() {
             colliders="trimesh"
             position={POSITION}
             rotation={ROTATION}
-            scale={0.5}
+            scale={0.1}
         >
             <primitive object={scene} />
 

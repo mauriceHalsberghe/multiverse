@@ -24,10 +24,10 @@ function Landspeeder({
     const body = useRef<RapierRigidBody>(null!)
     const { scene } = useGLTF(MODEL_PATH)
 
-    const gameMode = useGameStore((s) => s.gameMode)
+    const gameMode = useGameStore((state) => state.gameMode)
 
     useVehicleDrive(body, vehiclePosition)
-    useFollowCamera(!orbitControlsEnabled || gameMode === 'explore', body)
+    useFollowCamera(!orbitControlsEnabled && gameMode === 'explore', body)
     useEngineSound(body, ENGINE_SOUND)
     useBoostGlow(scene)
 

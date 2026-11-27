@@ -27,7 +27,7 @@ function Experience({
 }) {
     const vehiclePosition = useRef(new THREE.Vector3(0, 2, 0))
     const { scene: groundScene } = useGLTF('/models/desert_floor.glb')
-    const gameMode = useGameStore((s) => s.gameMode)
+    const gameMode = useGameStore((state) => state.gameMode)
 
 
     return (
