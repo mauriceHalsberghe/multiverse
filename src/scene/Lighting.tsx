@@ -3,7 +3,17 @@ import * as THREE from 'three'
 import { useFrame, useThree } from '@react-three/fiber'
 import Sky from './world/Sky'
 
-function Lighting({ target, debugEnabled = false }: { target: RefObject<THREE.Vector3>, debugEnabled?: boolean }) {
+const DICE_SCENE_TARGET = new THREE.Vector3(500, 0, 0)
+
+function Lighting({
+    target,
+    diceMode,
+    debugEnabled = false,
+}: {
+    target: RefObject<THREE.Vector3>
+    diceMode: boolean
+    debugEnabled?: boolean
+}) {
     const light = useRef<THREE.DirectionalLight>(null!)
     const helper = useRef<THREE.DirectionalLightHelper | null>(null)
     const scene = useThree((state) => state.scene)
@@ -23,8 +33,9 @@ function Lighting({ target, debugEnabled = false }: { target: RefObject<THREE.Ve
     }, [debugEnabled, scene])
 
     useFrame(() => {
-        light.current.position.set(target.current.x - 15, target.current.y + 50, target.current.z + -20)
-        light.current.target.position.copy(target.current)
+        const activeTarget = diceMode ? DICE_SCENE_TARGET : target.current
+        light.current.position.set(activeTarget.x - 15, activeTarget.y + 50, activeTarget.z - 20)
+        light.current.target.position.copy(activeTarget)
         light.current.target.updateMatrixWorld()
         helper.current?.update()
     })

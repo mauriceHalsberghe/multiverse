@@ -53,7 +53,11 @@ function Experience({
 
             </Physics>
 
-            <Lighting target={vehiclePosition} debugEnabled={debugEnabled} />
+            <Lighting
+                target={vehiclePosition}
+                diceMode={gameMode === 'dice'}
+                debugEnabled={debugEnabled}
+            />
             <Effects/>
 
         </Suspense>
