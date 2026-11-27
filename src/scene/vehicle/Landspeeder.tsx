@@ -53,6 +53,16 @@ function Landspeeder({
                 position={[0, 1, 0]}
                 friction={0.8}
             />
+
+            <CuboidCollider
+                args={[4.2, 0.5, 1.6]}
+                position={[0, 1.5, -3.25]}
+            />
+
+            <CuboidCollider
+                args={[1, 0.5, 1.6]}
+                position={[0, 3, -6]}
+            />
             <primitive object={scene} />
         </RigidBody>
     )

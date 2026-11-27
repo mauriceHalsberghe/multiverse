@@ -5,7 +5,7 @@ import * as THREE from 'three'
 import PoiLabel from '../pois/PoiLabel'
 
 const MODEL_PATH = '/models/escape_pod.glb'
-const POSITION: [number, number, number] = [200, -1, -150]
+const POSITION: [number, number, number] = [-25, -1, -200]
 const ROTATION: [number, number, number] = [0, 1.5, 0]
 
 function EscapePod() {

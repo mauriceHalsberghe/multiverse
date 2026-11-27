@@ -52,7 +52,10 @@ npm run dev
 
 ## Credits & Assets
 
-- **3D Models:** [List models and their creators/sources]
+### 3D Models:
+
+[Low-Poly Watto](https://skfb.ly/o6VGG) by pau.raurellgomis is licensed under CC Attribution
+
 - **Textures:** [Sources]
 - **Audio:** [Sources]
 - **Other Assets:** [Sources]

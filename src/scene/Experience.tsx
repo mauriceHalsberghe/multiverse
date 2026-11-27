@@ -14,6 +14,7 @@ import EscapePod from './props/EscapePod'
 import { useGLTF } from '@react-three/drei'
 import ShrubScatter from './props/ShrubScatter'
 import Effects from './Effects'
+import MosEspa from './pois/mos_espa/MosEspa'
 
 function Experience({
     orbitControlsEnabled,
@@ -39,6 +40,7 @@ function Experience({
                 <Homestead />
                 <SarlaccPit />
                 <Cantina />
+                <MosEspa />
 
                 <R2Unit />
                 <EscapePod />
