@@ -10,6 +10,7 @@ import DiceLogo from "./DiceLogo";
 import Credit from "../../props/Credit";
 import Cogwheels from "../../props/Cogwheels";
 import WattoVoice from "./WattoVoice";
+import WattoEasterEgg from "../../easter-eggs/WattoEasterEgg";
 
 const POSITION: [number, number, number] = [500, 0, 0]
 
@@ -45,6 +46,7 @@ function WattoChanceCube () {
             <DiceLogo />
 
             <WattoVoice />
+            <WattoEasterEgg />
 
             <Credit position={[13, 1 , 4.5]} rotation={[0, 3.5, 0]} type={1}/> 
             <Credit position={[13, 0 , 4]} rotation={[0, 3, 0]} type={2}/> 

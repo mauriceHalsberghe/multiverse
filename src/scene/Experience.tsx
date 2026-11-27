@@ -17,6 +17,7 @@ import Effects from './Effects'
 import MosEspa from './pois/mos_espa/MosEspa'
 import WattoChanceCube from './minigame/watto-chance-cube/WattoChanceCube'
 import { useGameStore } from '../store/useGameStore'
+import AsciiEasterEgg from './easter-eggs/AsciiEasterEgg'
 
 function Experience({
     orbitControlsEnabled,
@@ -59,6 +60,10 @@ function Experience({
                 debugEnabled={debugEnabled}
             />
             <Effects/>
+
+            {gameMode === 'explore' && <AsciiEasterEgg />}
+
+            
 
         </Suspense>
     )

@@ -34,7 +34,6 @@
 - Tiny Death Star orbiting the planet
 - Blue milk carton on the homestead
 - Speeder horn (H key)
-- Konami code hyperdrive
 - Millennium Falcon flyby
 - Hidden R2-D2 with hologram message
 - Tusken stone symbol puzzle
@@ -58,7 +57,6 @@
 - Class inside joke
 - Hidden credits monument
 - "Welcome to Gent / Artevelde" sign
-- Console.log ASCII art
 
 ### Cheap tricks
 
