@@ -7,6 +7,9 @@ import Workbench from "./Workbench";
 import DiceCamera from "./DiceCamera";
 import { useDiceStore } from "./useDiceStore";
 import DiceLogo from "./DiceLogo";
+import Credit from "../../props/Credit";
+import Cogwheels from "../../props/Cogwheels";
+import WattoVoice from "./WattoVoice";
 
 const POSITION: [number, number, number] = [500, 0, 0]
 
@@ -39,7 +42,13 @@ function WattoChanceCube () {
             <ChanceCube />
             <DiceCamera trayRef={trayRef} closing={closing} onClosed={handleClosed} />
             <Workbench />
-            <DiceLogo /> 
+            <DiceLogo />
+
+            <WattoVoice />
+
+            <Credit position={[13, 1 , 4.5]} rotation={[0, 3.5, 0]} type={1}/> 
+            <Credit position={[13, 0 , 4]} rotation={[0, 3, 0]} type={2}/> 
+            <Cogwheels />
         </group>
     )
 }

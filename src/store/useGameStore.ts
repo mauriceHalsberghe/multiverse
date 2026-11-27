@@ -8,6 +8,6 @@ type GameStore = {
 }
 
 export const useGameStore = create<GameStore>((set) => ({
-    gameMode: 'dice',
+    gameMode: 'explore',
     setGameMode: (gameMode) => set({ gameMode }),
 }))
