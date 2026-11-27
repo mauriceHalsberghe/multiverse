@@ -1,5 +1,5 @@
 import { useGLTF } from '@react-three/drei'
-import {  RigidBody,  } from '@react-three/rapier'
+import {  CuboidCollider, RigidBody,  } from '@react-three/rapier'
 import { useEffect } from 'react'
 import { configureShadows } from '../../../utils/configureShadows'
 
@@ -17,12 +17,24 @@ function DiceTray() {
     return (
         <RigidBody
             type="fixed"
-            colliders="trimesh"
+            colliders={false}
             position={POSITION}
             rotation={ROTATION}
             scale={0.1}
         >
             <primitive object={scene} />
+
+            <CuboidCollider args={[80, 10, 60]} position={[0, -7, 0]} />
+
+            <CuboidCollider args={[50, 60, 4]} position={[0, 35, 62]} />
+            <CuboidCollider args={[50, 60, 4]} position={[0, 35, -62]} />
+            <CuboidCollider args={[4, 60, 30]} position={[70, 35, 0]} />
+            <CuboidCollider args={[4, 50, 30]} position={[-70, 35, 0]} />
+
+            <CuboidCollider args={[4, 60, 30]} position={[50, 35, -40]} rotation={[0, Math.PI/4,0]}/>
+            <CuboidCollider args={[4, 50, 30]} position={[-50, 35, 40]} rotation={[0, Math.PI/4,0]}/>
+            <CuboidCollider args={[4, 60, 30]} position={[50, 35, 40]} rotation={[0, -Math.PI/4,0]}/>
+            <CuboidCollider args={[4, 60, 30]} position={[-50, 35, -40]} rotation={[0, -Math.PI/4,0]}/>
 
         </RigidBody>
     )

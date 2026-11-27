@@ -1,13 +1,16 @@
 import { useEffect } from 'react'
 import { RapierRigidBody } from '@react-three/rapier'
+import { useDiceStore } from '../useDiceStore'
 
 export function useDiceInput(bodyRef: React.RefObject<RapierRigidBody | null>) {
     useEffect(() => {
-        const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key.toLowerCase() !== 'e' || event.repeat) return
+
+        
+        return useDiceStore.subscribe((state, prev) => {
+            if (state.rollId === prev.rollId) return
 
             bodyRef.current?.applyImpulse(
-                { x: 0, y: 26, z: 0 },
+                { x: 0, y: 30, z: 0 },
                 true
             )
 
@@ -16,12 +19,7 @@ export function useDiceInput(bodyRef: React.RefObject<RapierRigidBody | null>) {
                 y: Math.random() * 4 - 2,
                 z: Math.random() * 4 - 2
             }, true)
-        }
+        })
 
-        window.addEventListener('keydown', handleKeyDown)
-
-        return () => {
-            window.removeEventListener('keydown', handleKeyDown)
-        }
     }, [bodyRef])
 }

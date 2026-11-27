@@ -7,6 +7,7 @@ import { useIsMobile } from './utils/useIsMobile'
 import { useAudioUnlock } from './utils/useAudioUnlock'
 import { useGameStore } from './store/useGameStore'
 import DiceGame from './ui/DiceGame'
+import { useDiceStore } from './scene/minigame/watto-chance-cube/useDiceStore'
  
 
 function App() {
@@ -15,8 +16,9 @@ function App() {
     const showOrbitToggle = import.meta.env.DEV && debugEnabled
 
     const isMobile = useIsMobile();
-
     const gameMode = useGameStore((state) => state.gameMode)
+    const closing = useDiceStore((state) => state.closing)
+
     useAudioUnlock()
 
     return (
@@ -53,7 +55,7 @@ function App() {
                 </button>
             )}
 
-            {gameMode == 'dice' && 
+            {gameMode === 'dice' && !closing &&
                 <DiceGame />
             }
 

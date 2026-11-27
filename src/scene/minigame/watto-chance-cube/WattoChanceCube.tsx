@@ -1,17 +1,20 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { useGameStore } from "../../../store/useGameStore";
 import DiceTray from "./DiceTray";
 import * as THREE from 'three'
 import ChanceCube from "./ChanceCube/ChanceCube";
 import Workbench from "./Workbench";
 import DiceCamera from "./DiceCamera";
+import { useDiceStore } from "./useDiceStore";
+import DiceLogo from "./DiceLogo";
 
 const POSITION: [number, number, number] = [500, 0, 0]
 
 function WattoChanceCube () {
     const trayRef = useRef<THREE.Group>(null)
-    const [closing, setClosing] = useState(false)
 
+    const closing = useDiceStore((state) => state.closing)
+    const setClosing = useDiceStore((state) => state.setClosing)
     const setGameMode = useGameStore((s) => s.setGameMode)
 
     useEffect(() => {
@@ -20,8 +23,13 @@ function WattoChanceCube () {
         }
         window.addEventListener("keydown", onKey)
         return () => window.removeEventListener("keydown", onKey)
-    }, [])
+    }, [setClosing])
 
+    const handleClosed = useCallback(() => {
+        useDiceStore.setState({ phase: "idle" })
+        setClosing(false)
+        setGameMode("explore")
+    }, [setClosing, setGameMode])
 
     return (
         <group position={POSITION}>
@@ -29,8 +37,9 @@ function WattoChanceCube () {
                 <DiceTray />
             </group>
             <ChanceCube />
-            <DiceCamera trayRef={trayRef} closing={closing} onClosed={() => setGameMode('explore')} />
+            <DiceCamera trayRef={trayRef} closing={closing} onClosed={handleClosed} />
             <Workbench />
+            <DiceLogo /> 
         </group>
     )
 }

@@ -12,6 +12,26 @@
     pointer-events: none;
     color: white;
     font-family: sans-serif;
+    pointer-events: all;
+}
+
+.dicegame__close {
+    position: absolute;
+    left: 2rem;
+    top: 2rem;
+    font-size: 2rem;
+    background-color: #836650;
+    color: white;
+    border-radius: 10rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    line-height: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: #67503e 5px solid;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
 }
 
 .dicegame__header {
@@ -19,19 +39,11 @@
     h1 {
         display: none;
     }
-    img {
-        max-width: 38rem;
-    }
-    p {
-        text-align: center;
-        font-size: 2rem;
-        margin: 0;
-    }
 }
 
 .dicegame__stats {
     position: absolute;
-    left: 5vw;
+    left: clamp(1rem, -12rem + 20.8vw, 10vw);
     top: 50%;
     transform: translateY(-50%);
     display: flex;
@@ -59,7 +71,7 @@
 
 .dicegame__history {
     position: absolute;
-    right: 5vw;
+    right: 10vw;
     top: 50%;
     transform: translateY(-50%);
     display: grid;
@@ -100,16 +112,35 @@
         border: hsl(26, 25%, 30%) 10px solid;
     }
 
-    &:active {
+    &:active{
         transform: translateY(5px);
         box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     }
 }
 
+
+.choice:disabled {
+    cursor: default;
+    &:hover {
+        border: #67503e 10px solid;
+    }
+
+    &:active {
+        transform: translateY(0);
+        box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+    }
+}
+
 .choice--red, .history--red {
     background-color: #ac3939;
+    &:disabled {
+        background-color: #7f5959;
+    }
 }
 
 .choice--blue, .history--blue {
     background-color: #3f3fab;
+    &:disabled {
+        background-color: #5d5d88;
+    }
 }

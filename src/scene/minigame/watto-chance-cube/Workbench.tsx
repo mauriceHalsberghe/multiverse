@@ -10,7 +10,7 @@ function Workbench() {
     const { scene } = useGLTF(MODEL_PATH)
 
     useEffect(() => {
-        configureShadows(scene)
+        configureShadows(scene, false, true)
     }, [scene])
 
     return (

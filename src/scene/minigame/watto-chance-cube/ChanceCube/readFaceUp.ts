@@ -1,6 +1,9 @@
 import * as THREE from 'three'
+import type { FaceResult } from '../useDiceStore'
 
-const faces = [
+type Face = FaceResult & { normal: THREE.Vector3 }
+
+const faces: Face[] = [
     { value: 1, normal: new THREE.Vector3(0, 1, 0), color: 'red' },
     { value: 2, normal: new THREE.Vector3(0, -1, 0), color: 'blue' },
     { value: 3, normal: new THREE.Vector3(1, 0, 0), color: 'red' },
@@ -10,7 +13,7 @@ const faces = [
 ]
 
 
-export function readFaceUp(scene: THREE.Group) {
+export function readFaceUp(scene: THREE.Group): FaceResult {
     scene.updateMatrixWorld(true)
 
     const up = new THREE.Vector3(0, 1, 0)
@@ -35,6 +38,6 @@ export function readFaceUp(scene: THREE.Group) {
             }
         }
     })
-
-    console.log(topFace.color)
+    
+    return { value: topFace.value, color: topFace.color }
 }

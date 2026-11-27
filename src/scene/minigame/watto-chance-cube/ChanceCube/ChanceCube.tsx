@@ -5,6 +5,7 @@ import { readFaceUp } from './readFaceUp'
 import { useDiceInput } from './useDiceInput'
 import { useDicePhysics } from './useDicePhysics'
 import { configureShadows } from '../../../../utils/configureShadows'
+import { useDiceStore } from '../useDiceStore'
 
 const MODEL_PATH = '/models/mos_espa/watto_dice.glb'
 const POSITION: [number, number, number] = [0, 2, 0]
@@ -32,8 +33,12 @@ function ChanceCube() {
             scale={0.1}
             ref={bodyRef}
             canSleep
-            onSleep={() => readFaceUp(scene)} 
-        >
+            onSleep={() => {
+                if (useDiceStore.getState().phase !== 'rolling') return
+                const face = readFaceUp(scene)
+                useDiceStore.getState().finishRoll(face)
+            }}
+                    >
             <primitive object={scene} />
 
         </RigidBody>

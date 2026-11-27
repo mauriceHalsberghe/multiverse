@@ -1,13 +1,19 @@
 import { Bloom, DepthOfField, EffectComposer, Vignette } from "@react-three/postprocessing"
+import { useGameStore } from "../store/useGameStore"
 
 function Effects() {
+    const gameMode = useGameStore((state) => state.gameMode)
+
     return (
         <EffectComposer>
-            <Bloom
-                mipmapBlur
-                luminanceThreshold={0.8} 
-                intensity={0.5}
-            />
+
+            {gameMode === 'explore' &&   
+                <Bloom
+                    mipmapBlur
+                    luminanceThreshold={0.8} 
+                    intensity={0.5}
+                />
+            }
 
             <Vignette
                 offset={0.5}
