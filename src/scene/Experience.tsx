@@ -15,6 +15,8 @@ import { useGLTF } from '@react-three/drei'
 import ShrubScatter from './props/ShrubScatter'
 import Effects from './Effects'
 import MosEspa from './pois/mos_espa/MosEspa'
+import WattoChanceCube from './minigame/watto-chance-cube/WattoChanceCube'
+import { useGameStore } from '../store/useGameStore'
 
 function Experience({
     orbitControlsEnabled,
@@ -25,6 +27,7 @@ function Experience({
 }) {
     const vehiclePosition = useRef(new THREE.Vector3(0, 2, 0))
     const { scene: groundScene } = useGLTF('/models/desert_floor.glb')
+    const gameMode = useGameStore((s) => s.gameMode)
 
 
     return (
@@ -45,6 +48,8 @@ function Experience({
                 <R2Unit />
                 <EscapePod />
                 <ShrubScatter vehiclePosition={vehiclePosition} ground={groundScene} />
+
+                {gameMode === 'dice' && <WattoChanceCube />}
 
             </Physics>
 

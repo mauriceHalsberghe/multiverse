@@ -4,6 +4,7 @@ import { BallCollider, RigidBody } from "@react-three/rapier"
 import * as THREE from "three"
 import PoiLabel from "../PoiLabel"
 import { isPlayer } from "../../../utils/useIsPlayer"
+import { useGameStore } from "../../../store/useGameStore"
 
 const MODEL_PATH = "/models/mos_espa/watto.glb"
 const POSITION: [number, number, number] = [0, -1, -30]
@@ -12,7 +13,29 @@ const ROTATION: [number, number, number] = [0, 2.2, 0]
 function Watto() {
     const { scene, animations } = useGLTF(MODEL_PATH)
     const { actions, names } = useAnimations(animations, scene)
+
     const [showLabel, setShowLabel] = useState(false);
+    const setGameMode = useGameStore((s) => s.setGameMode)
+
+    useEffect(() => {
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (
+                event.key.toLowerCase() === "e" &&
+                !event.repeat &&
+                showLabel
+            ) {
+                console.log('dice');
+                
+                setGameMode("dice")
+            }
+        }
+
+        window.addEventListener("keydown", handleKeyDown)
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown)
+        }
+    }, [showLabel, setGameMode])
 
     useEffect(() => {
         scene.traverse((object) => {

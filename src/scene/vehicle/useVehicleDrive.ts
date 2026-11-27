@@ -3,6 +3,7 @@ import * as THREE from 'three'
 import { useBeforePhysicsStep, type RapierRigidBody } from '@react-three/rapier'
 import { PHYSICS_TIME_STEP } from '../physicsConfig'
 import useVehicleControls from './useVehicleControls'
+import { useGameStore } from '../../store/useGameStore'
 
 const ACCELERATION = 80
 const MAX_SPEED = 120
@@ -28,6 +29,13 @@ function useVehicleDrive(
         rotation.set(r.x, r.y, r.z, r.w)
         const position = rb.translation()
         vehiclePosition.current.set(position.x, position.y, position.z)
+
+        if (useGameStore.getState().gameMode !== 'explore') {
+            const v = rb.linvel()
+            rb.setLinvel({ x: 0, y: v.y, z: 0 }, true)
+            rb.setAngvel({ x: 0, y: 0, z: 0 }, true)
+            return
+        }
 
         forward.set(0, 0, 1).applyQuaternion(rotation)
         forward.y = 0

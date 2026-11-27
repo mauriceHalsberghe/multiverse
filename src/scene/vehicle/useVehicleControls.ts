@@ -1,4 +1,5 @@
 import { useKeyboardControls } from '@react-three/drei'
+import { useGameStore } from '../../store/useGameStore'
 
 type VehicleControl = 'forward' | 'back' | 'left' | 'right'
 
@@ -13,6 +14,11 @@ function useVehicleControls() {
     const [, getControls] = useKeyboardControls<VehicleControl>()
 
     return () => {
+
+        if (useGameStore.getState().gameMode !== 'explore') {
+            return { throttle: 0, steer: 0 }
+        }
+
         const controls = getControls()
         const keyboardThrottle = Number(controls.forward) - Number(controls.back)
         const keyboardSteer = Number(controls.left) - Number(controls.right)
