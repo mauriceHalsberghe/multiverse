@@ -1,3 +1,4 @@
+import PoiLabel from "../PoiLabel"
 import Cafe from "./Cafe"
 import House1 from "./House1"
 import House2 from "./House2"
@@ -20,6 +21,8 @@ function MosEspa() {
             <House3 />
             <House4 />
             <Cafe />
+
+            <PoiLabel text="Mos Espa" position={[65 , 18 , 20]} />
         </group>
     )
 }

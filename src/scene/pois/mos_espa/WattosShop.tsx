@@ -1,6 +1,7 @@
 import { useGLTF } from "@react-three/drei"
 import { CylinderCollider, RigidBody } from "@react-three/rapier"
 import * as THREE from 'three'
+import Watto from "./Watto"
 
 const MODEL_PATH = '/models/mos_espa/watto_shop.glb'
 const POSITION: [number, number, number] = [-31, -0.3, -3]
@@ -30,6 +31,8 @@ function WattosShop() {
                 <CylinderCollider args={[5, 23]} position={[0, 5, 0]}/>
                 <CylinderCollider args={[5, 3]} position={[6, 5, 24]}/>
                 <CylinderCollider args={[5, 3]} position={[13, 5, 21]}/>
+
+                <Watto />
                 
             </RigidBody>
         </>
