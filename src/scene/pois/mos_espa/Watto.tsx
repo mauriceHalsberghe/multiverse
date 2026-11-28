@@ -5,6 +5,7 @@ import * as THREE from "three"
 import PoiLabel from "../PoiLabel"
 import { isPlayer } from "../../../utils/useIsPlayer"
 import { useGameStore } from "../../../store/useGameStore"
+import { useTransitionStore } from "../../../store/useTransitionStore"
 
 const MODEL_PATH = "/models/mos_espa/watto.glb"
 const POSITION: [number, number, number] = [0, -1, -30]
@@ -17,19 +18,22 @@ function Watto() {
     const [showLabel, setShowLabel] = useState(false);
     const setGameMode = useGameStore((s) => s.setGameMode)
 
+    const playTransition = useTransitionStore((s) => s.play)
+
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {
+            if (useGameStore.getState().gameMode !== "explore") return
+
             if (
                 event.key.toLowerCase() === "e" &&
                 !event.repeat &&
                 showLabel
             ) {
-                setGameMode("dice")
+                playTransition(() => setGameMode("dice"))
             }
         }
 
         window.addEventListener("keydown", handleKeyDown)
-
         return () =>  window.removeEventListener("keydown", handleKeyDown)
     }, [showLabel, setGameMode])
 

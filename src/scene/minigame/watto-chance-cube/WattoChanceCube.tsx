@@ -23,11 +23,11 @@ function WattoChanceCube () {
 
     useEffect(() => {
         const onKey = (e: KeyboardEvent) => {
-            if (e.code === "Escape") setClosing(true)
+            if (e.code === "Escape") useDiceStore.getState().requestClose()
         }
         window.addEventListener("keydown", onKey)
         return () => window.removeEventListener("keydown", onKey)
-    }, [setClosing])
+    }, [])
 
     const handleClosed = useCallback(() => {
         useDiceStore.setState({ phase: "idle" })

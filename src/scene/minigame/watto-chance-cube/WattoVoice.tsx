@@ -9,26 +9,67 @@ const STREAK_CLIP = "watto4.mp3"
 
 const STREAK_MILESTONES = [5, 10]
 
+const TAIL_FADE = 0.25
+const CUT_FADE = 0.12
+
+type Clip = {
+    audio: HTMLAudioElement
+    gain: GainNode
+    stopTimer?: number
+}
+
 const pickRandom = <T,>(items: T[]): T =>
     items[Math.floor(Math.random() * items.length)]
 
 function WattoVoice() {
     useEffect(() => {
-        const clips: Record<string, HTMLAudioElement> = {}
+        const ctx = new AudioContext()
+
+        const clips: Record<string, Clip> = {}
         for (const file of [...WIN_CLIPS, ...LOSE_CLIPS, STREAK_CLIP]) {
             const audio = new Audio(BASE_PATH + file)
             audio.preload = "auto"
-            clips[file] = audio
+
+            const gain = ctx.createGain()
+            ctx.createMediaElementSource(audio).connect(gain).connect(ctx.destination)
+
+            clips[file] = { audio, gain }
         }
 
-        let current: HTMLAudioElement | null = null
+        let current: Clip | null = null
+
+        const fadeOutAndStop = (clip: Clip) => {
+            const now = ctx.currentTime
+            clip.gain.gain.cancelScheduledValues(now)
+            clip.gain.gain.setValueAtTime(clip.gain.gain.value, now)
+            clip.gain.gain.linearRampToValueAtTime(0, now + CUT_FADE)
+
+            clearTimeout(clip.stopTimer)
+            clip.stopTimer = window.setTimeout(() => clip.audio.pause(), CUT_FADE * 1000)
+        }
 
         const play = (file: string) => {
-            current?.pause()
             const clip = clips[file]
-            clip.currentTime = 0
+
+            if (current && current !== clip) fadeOutAndStop(current)
+
+            clearTimeout(clip.stopTimer)
+            ctx.resume()
+
+            const { audio, gain } = clip
+            audio.currentTime = 0
+
+            const now = ctx.currentTime
+            gain.gain.cancelScheduledValues(now)
+            gain.gain.setValueAtTime(1, now)
+
+            if (Number.isFinite(audio.duration) && audio.duration > TAIL_FADE) {
+                gain.gain.setValueAtTime(1, now + audio.duration - TAIL_FADE)
+                gain.gain.linearRampToValueAtTime(0, now + audio.duration)
+            }
+
             current = clip
-            clip.play().catch(() => {})
+            audio.play().catch(() => {})
         }
 
         const unsubscribe = useDiceStore.subscribe((state, prev) => {
@@ -44,7 +85,8 @@ function WattoVoice() {
 
         return () => {
             unsubscribe()
-            current?.pause()
+            if (current) fadeOutAndStop(current)
+            window.setTimeout(() => ctx.close(), CUT_FADE * 1000 + 50)
         }
     }, [])
 

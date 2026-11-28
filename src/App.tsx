@@ -8,6 +8,7 @@ import { useAudioUnlock } from './utils/useAudioUnlock'
 import { useGameStore } from './store/useGameStore'
 import DiceGame from './ui/DiceGame'
 import { useDiceStore } from './scene/minigame/watto-chance-cube/useDiceStore'
+import Transition from './ui/Transition'
  
 
 function App() {
@@ -58,6 +59,7 @@ function App() {
             {gameMode === 'dice' && !closing &&
                 <DiceGame />
             }
+            <Transition />
 
             
         </div>

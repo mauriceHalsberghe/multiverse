@@ -6,13 +6,14 @@ function DiceGame() {
     const history = useDiceStore((state) => state.history)
     const streak = useDiceStore((state) => state.streak)
     const bestStreak = useDiceStore((state) => state.bestStreak)
-    const setClosing = useDiceStore((state) => state.setClosing)
+
+    const requestClose = useDiceStore((state) => state.requestClose)
     
 
     return (
         <main className="dicegame">
 
-            <button className="dicegame__close" onClick={() => setClosing(true)} >✖</button>
+            <button className="dicegame__close" onClick={requestClose}>✖</button>
 
             <header className="dicegame__header">
                 <h1>Watto's Chance Cubes</h1>

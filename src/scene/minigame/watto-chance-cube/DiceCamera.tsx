@@ -38,13 +38,11 @@ function DiceCamera({ trayRef, closing, onClosed }: Props) {
         timeline.current = gsap.timeline()
             .to(camera.position, {
                 ...tray.localToWorld(VIEW_OFFSET.clone()),
-                duration: 1.2,
-                ease: 'power2.inOut',
+                duration: 0,
             }, 0)
             .to(look.current, {
                 ...tray.localToWorld(LOOK_OFFSET.clone()),
-                duration: 1.2,
-                ease: 'power2.inOut',
+                duration: 0,
             }, 0)
 
         return () => {
@@ -60,13 +58,11 @@ function DiceCamera({ trayRef, closing, onClosed }: Props) {
         timeline.current = gsap.timeline({ onComplete: onClosed })
             .to(camera.position, {
                 ...saved.current.position,
-                duration: 0.9,
-                ease: 'power2.inOut',
+                duration: 0,
             }, 0)
             .to(look.current, {
                 ...saved.current.look,
-                duration: 0.9,
-                ease: 'power2.inOut',
+                duration: 0,
             }, 0)
     }, [closing, camera, onClosed])
 

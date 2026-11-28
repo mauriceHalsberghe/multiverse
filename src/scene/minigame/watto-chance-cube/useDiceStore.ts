@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { useTransitionStore } from '../../../store/useTransitionStore'
 
 export type Choice = 'red' | 'blue'
 
@@ -24,6 +25,7 @@ type DiceStore = {
     roll: (choice: Choice) => void
     finishRoll: (face: FaceResult) => void
     setClosing: (closing: boolean) => void
+    requestClose: () => void
 }
 
 export const useDiceStore = create<DiceStore>()(
@@ -42,6 +44,7 @@ export const useDiceStore = create<DiceStore>()(
             closing: false,
 
             roll: (choice) => {
+                if (useTransitionStore.getState().active) return
                 if (get().phase !== 'idle') return
                 set({ choice, phase: 'rolling', rollId: get().rollId + 1 })
             },
@@ -64,6 +67,11 @@ export const useDiceStore = create<DiceStore>()(
             },
 
             setClosing: (closing) => set({ closing }),
+
+            requestClose: () => {
+                if (get().closing) return
+                useTransitionStore.getState().play(() => set({ closing: true }))
+            },
         }),
         {
             name: 'watto-chance-cube',
