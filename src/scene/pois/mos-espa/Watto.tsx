@@ -3,9 +3,9 @@ import { useAnimations, useGLTF } from "@react-three/drei"
 import { BallCollider, RigidBody } from "@react-three/rapier"
 import * as THREE from "three"
 import PoiLabel from "../PoiLabel"
-import { isPlayer } from "../../../utils/useIsPlayer"
 import { useGameStore } from "../../../store/useGameStore"
 import { useTransitionStore } from "../../../store/useTransitionStore"
+import { isPlayer } from "../../../utils/isPlayer"
 
 const MODEL_PATH = "/models/mos_espa/watto.glb"
 const POSITION: [number, number, number] = [0, -1, -30]

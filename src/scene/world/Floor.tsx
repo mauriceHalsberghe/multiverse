@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei'
 import { RigidBody } from '@react-three/rapier'
 import * as THREE from 'three'
-import { DESERT_SCALE } from '../../utils/useContstants'
+import { DESERT_SCALE } from '../../utils/constants'
 
 const MODEL_PATH = '/models/desert_floor.glb'
 

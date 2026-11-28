@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import { RapierRigidBody } from '@react-three/rapier'
-import { useDiceStore } from '../useDiceStore'
+import { useDiceStore } from '../../../../store/useDiceStore'
 
-export function useDiceInput(bodyRef: React.RefObject<RapierRigidBody | null>) {
+export function useChanceCubeInput(bodyRef: React.RefObject<RapierRigidBody | null>) {
     useEffect(() => {
 
         

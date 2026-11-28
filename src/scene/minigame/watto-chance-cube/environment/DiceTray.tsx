@@ -1,7 +1,7 @@
 import { useGLTF } from '@react-three/drei'
 import {  CuboidCollider, RigidBody,  } from '@react-three/rapier'
 import { useEffect } from 'react'
-import { configureShadows } from '../../../utils/configureShadows'
+import { configureShadows } from '../../../../utils/configureShadows'
 
 const MODEL_PATH = '/models/mos_espa/dice_tray.glb'
 const POSITION: [number, number, number] = [0, 0, 0]

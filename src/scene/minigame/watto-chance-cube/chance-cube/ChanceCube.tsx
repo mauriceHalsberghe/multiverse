@@ -2,12 +2,12 @@ import { useGLTF } from '@react-three/drei'
 import { RapierRigidBody, RigidBody,  } from '@react-three/rapier'
 import { useEffect, useRef } from 'react'
 import { readFaceUp } from './readFaceUp'
-import { useDiceInput } from './useDiceInput'
-import { useDicePhysics } from './useDicePhysics'
 import { configureShadows } from '../../../../utils/configureShadows'
-import { useDiceStore } from '../useDiceStore'
+import { useChanceCubePhysics } from './useChanceCubePhysics'
+import { useChanceCubeInput } from './useChanceCubeInput'
+import { useDiceStore } from '../../../../store/useDiceStore'
 
-const MODEL_PATH = '/models/mos_espa/watto_dice.glb'
+const MODEL_PATH = '/models/mos_espa/chance_cube.glb'
 const POSITION: [number, number, number] = [0, 2, 0]
 const ROTATION: [number, number, number] = [0, Math.PI / Math.random() , 0]
 
@@ -15,8 +15,8 @@ function ChanceCube() {
     const { scene } = useGLTF(MODEL_PATH)
     const bodyRef = useRef<RapierRigidBody>(null);
 
-    useDiceInput(bodyRef)
-    useDicePhysics(bodyRef)
+    useChanceCubeInput(bodyRef)
+    useChanceCubePhysics(bodyRef)
 
     useEffect(() => {
         configureShadows(scene)

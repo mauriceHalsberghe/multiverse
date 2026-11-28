@@ -3,7 +3,7 @@ import { CylinderCollider, RigidBody } from "@react-three/rapier"
 import * as THREE from 'three'
 import Watto from "./Watto"
 
-const MODEL_PATH = '/models/mos_espa/watto_shop.glb'
+const MODEL_PATH = '/models/mos_espa/wattos_shop.glb'
 const POSITION: [number, number, number] = [-31, -0.3, -3]
 const ROTATION: [number, number, number] = [0, -1, 0]
 

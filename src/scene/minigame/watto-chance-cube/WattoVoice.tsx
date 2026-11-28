@@ -1,5 +1,5 @@
 import { useEffect } from "react"
-import { useDiceStore } from "./useDiceStore"
+import { useDiceStore } from "../../../store/useDiceStore"
 
 const BASE_PATH = "/audio/watto/"
 

@@ -6,9 +6,10 @@ import JoyStick from './ui/JoyStick'
 import { useIsMobile } from './utils/useIsMobile'
 import { useAudioUnlock } from './utils/useAudioUnlock'
 import { useGameStore } from './store/useGameStore'
-import DiceGame from './ui/DiceGame'
-import { useDiceStore } from './scene/minigame/watto-chance-cube/useDiceStore'
 import Transition from './ui/Transition'
+import { useDiceStore } from './store/useDiceStore'
+import ChanceCubeUI from './ui/ChanceCubeUI'
+import { Perf } from 'r3f-perf'
  
 
 function App() {
@@ -36,6 +37,9 @@ function App() {
                     {showOrbitToggle && orbitControlsEnabled && (
                         <OrbitControls makeDefault target={[0, 1, 0]} />
                     )}
+
+                    {import.meta.env.DEV && <Perf position="top-right" />}
+
                     <Experience
                         orbitControlsEnabled={orbitControlsEnabled}
                         debugEnabled={debugEnabled}
@@ -57,7 +61,7 @@ function App() {
             )}
 
             {gameMode === 'dice' && !closing &&
-                <DiceGame />
+                <ChanceCubeUI />
             }
             <Transition />
 

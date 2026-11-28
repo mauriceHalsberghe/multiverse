@@ -3,9 +3,9 @@ import { BallCollider, CapsuleCollider, RigidBody } from '@react-three/rapier'
 import * as THREE from 'three'
 import PoiLabel from '../pois/PoiLabel'
 import { useRef, useState } from 'react'
-import R2AudioUrl from '../../audio/R2D2.mp3'
+import R2AudioUrl from '../../audio/r2d2.mp3'
 import SandPile from './SandPile'
-import { isPlayer } from '../../utils/useIsPlayer'
+import { isPlayer } from '../../utils/isPlayer'
 
 const MODEL_PATH = '/models/r2_unit.glb'
 const POSITION: [number, number, number] = [-100, 1.75, 140]

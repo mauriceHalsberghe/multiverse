@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { PositionalAudio } from '@react-three/drei'
-import cantinaAudioUrl from '../../../audio/CantinaBand.mp3'
+import cantinaAudioUrl from '../../../audio/cantina_band.mp3'
 
 const REF = 20
 const MAX = 80

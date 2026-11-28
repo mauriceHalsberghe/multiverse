@@ -1,11 +1,11 @@
 import { PositionalAudio, useTexture } from '@react-three/drei'
 import { Suspense, useCallback, useEffect, useRef, useState } from 'react';
 import { DoubleSide, SRGBColorSpace } from 'three'
-import { isPlayer } from '../../utils/useIsPlayer';
+import { isPlayer } from '../../utils/isPlayer';
 import { BallCollider } from '@react-three/rapier';
 import PoiLabel from '../pois/PoiLabel';
 import * as THREE from 'three';
-import GraffitiAudioUrl from '../../audio/SprayPaint.mp3';
+import GraffitiAudioUrl from '../../audio/spray_paint.mp3';
 import { useUIStore } from '../../store/useUIStore';
 
 type GraffitiProps = {

@@ -1,16 +1,16 @@
 import { useCallback, useEffect, useRef } from "react";
 import { useGameStore } from "../../../store/useGameStore";
-import DiceTray from "./DiceTray";
 import * as THREE from 'three'
-import ChanceCube from "./ChanceCube/ChanceCube";
-import Workbench from "./Workbench";
+import ChanceCube from "./chance-cube/ChanceCube";
 import DiceCamera from "./DiceCamera";
-import { useDiceStore } from "./useDiceStore";
-import DiceLogo from "./DiceLogo";
-import Credit from "../../props/Credit";
-import Cogwheels from "../../props/Cogwheels";
 import WattoVoice from "./WattoVoice";
 import WattoEasterEgg from "../../easter-eggs/WattoEasterEgg";
+import DiceTray from "./environment/DiceTray";
+import Workbench from "./environment/Workbench";
+import Credit from "../../props/Credit";
+import Cogwheels from "../../props/Cogwheels";
+import ChanceCubeLogo from "./environment/ChanceCubeLogo";
+import { useDiceStore } from "../../../store/useDiceStore";
 
 const POSITION: [number, number, number] = [500, 0, 0]
 
@@ -30,7 +30,7 @@ function WattoChanceCube () {
     }, [])
 
     const handleClosed = useCallback(() => {
-        useDiceStore.setState({ phase: "idle" })
+        useDiceStore.setState({ phase: "idle", showResult: false })
         setClosing(false)
         setGameMode("explore")
     }, [setClosing, setGameMode])
@@ -43,7 +43,7 @@ function WattoChanceCube () {
             <ChanceCube />
             <DiceCamera trayRef={trayRef} closing={closing} onClosed={handleClosed} />
             <Workbench />
-            <DiceLogo />
+            <ChanceCubeLogo />
 
             <WattoVoice />
             <WattoEasterEgg />

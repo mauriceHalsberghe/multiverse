@@ -1,7 +1,7 @@
 import { useMemo, type RefObject } from 'react'
 import * as THREE from 'three'
 import { Shrub } from './Shrub'
-import { DESERT_SCALE } from '../../utils/useContstants'
+import { DESERT_SCALE } from '../../utils/constants'
 
 const COUNT = 100
 const AREA_SIZE = 700

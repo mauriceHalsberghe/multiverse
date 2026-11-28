@@ -1,7 +1,7 @@
 import { RapierRigidBody, useBeforePhysicsStep } from '@react-three/rapier'
 import { useRef } from 'react'
 
-export function useDicePhysics( bodyRef: React.RefObject<RapierRigidBody | null>) {
+export function useChanceCubePhysics( bodyRef: React.RefObject<RapierRigidBody | null>) {
     const lowSpeedTimer = useRef(0)
 
     useBeforePhysicsStep((world) => {

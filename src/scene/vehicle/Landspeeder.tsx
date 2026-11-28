@@ -5,8 +5,8 @@ import { CuboidCollider, RapierRigidBody, RigidBody } from '@react-three/rapier'
 import useFollowCamera from './useFollowCamera'
 import useVehicleDrive from './useVehicleDrive'
 import useEngineSound from './useEngineSound'
-import useBoostGlow from './useBoostglow'
 import { useGameStore } from '../../store/useGameStore'
+import useBoostGlow from './useBoostGlow'
 
 
 const MODEL_PATH = '/models/landspeeder.glb'

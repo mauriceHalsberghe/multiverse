@@ -1,12 +1,12 @@
 import { useGLTF, useTexture } from '@react-three/drei'
-import logo from '../../../assets/watto_chance_cube.png'
+import logo from '../../../../assets/watto_chance_cube.png'
 import { SRGBColorSpace } from 'three'
 
 const MODEL_PATH = '/models/mos_espa/worktable.glb'
 const POSITION: [number, number, number] = [0, 2, -12]
 const ROTATION: [number, number, number] = [-0.95, 0, 0]
 
-function DiceLogo() {
+function ChanceCubeLogo() {
     const texture = useTexture(logo, (texture) => {
         texture.colorSpace = SRGBColorSpace
     })
@@ -21,4 +21,4 @@ function DiceLogo() {
 
 useGLTF.preload(MODEL_PATH)
 
-export default DiceLogo
+export default ChanceCubeLogo
