@@ -1,6 +1,7 @@
-import { useDiceStore } from "../scene/minigame/watto-chance-cube/useDiceStore";
+import { useDiceStore } from "../store/useDiceStore"
+import ChanceCubeResult from "./ChanceCubeResult"
 
-function DiceGame() {
+function ChanceCubeUI() {
     const roll = useDiceStore((state) => state.roll)
     const phase = useDiceStore((state) => state.phase)
     const history = useDiceStore((state) => state.history)
@@ -13,7 +14,7 @@ function DiceGame() {
     return (
         <main className="dicegame">
 
-            <button className="dicegame__close" onClick={requestClose}>✖</button>
+            <button className="button dicegame__close" onClick={requestClose}>✖</button>
 
             <header className="dicegame__header">
                 <h1>Watto's Chance Cubes</h1>
@@ -39,19 +40,20 @@ function DiceGame() {
             </section>
 
             <section className="dicegame__buttons">
-                <button className="choice choice--red" onClick={() => roll('red')} disabled={phase !== 'idle'}>
+                <button className="button choice choice--red" onClick={() => roll('red')} disabled={phase !== 'idle'}>
                     <span className="choice__indicator"></span>
                     Red
                 </button>
 
-                <button className="choice choice--blue" onClick={() => roll('blue')} disabled={phase !== 'idle'}>
+                <button className="button choice choice--blue" onClick={() => roll('blue')} disabled={phase !== 'idle'}>
                     <span className="choice__indicator"></span>
                     Blue
                 </button>
             </section>
-
+            
+            <ChanceCubeResult />
         </main>
     );
 }
 
-export default DiceGame;
+export default ChanceCubeUI;

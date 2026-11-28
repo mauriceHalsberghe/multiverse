@@ -1,7 +1,30 @@
 @import url("./poi-label.css");
 @import url("./joystick.css");
-@import url("./dicegame.css");
+@import url("./dice-game.css");
 @import url("./transition.css");
+
+:root {
+  --color-brown: #836650;
+  --color-brown-dark: #67503e;
+  --color-brown-darker: #4a382b;
+  
+  --color-gold: linear-gradient(
+    150deg,
+    #a54e07,
+    #b47e11,
+    #fef1a2,
+    #bc881b,
+    #a54e07
+  );
+
+  --color-white: white;
+  --color-text-muted: rgba(255, 255, 255, 0.798);
+
+  --shadow-standard: 0 5px 5px rgba(0, 0, 0, 0.5);
+  --shadow-active: 0 0 5px rgba(0, 0, 0, 0.5);
+
+  --button-transition: all 150ms ease;
+}
 
 html,
 body,
@@ -33,6 +56,13 @@ body {
 @font-face {
   font-family: 'StarJedi';
   src: url('/fonts/StarJedi.otf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'StorySoFar';
+  src: url('/fonts/StorySoFar.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
