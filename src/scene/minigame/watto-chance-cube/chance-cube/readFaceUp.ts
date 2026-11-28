@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import type { FaceResult } from '../useDiceStore'
+import type { FaceResult } from '../../../../store/useDiceStore'
 
 type Face = FaceResult & { normal: THREE.Vector3 }
 
