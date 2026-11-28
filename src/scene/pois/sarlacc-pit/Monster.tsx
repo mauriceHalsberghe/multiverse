@@ -3,7 +3,7 @@ import * as THREE from 'three'
 import { useGLTF, useAnimations, PositionalAudio } from '@react-three/drei'
 import { BallCollider, RigidBody } from '@react-three/rapier'
 
-import MonsterAudioUrl from '../../../audio/sarlacc.mp3';
+import MonsterAudioUrl from '../../../audio/Sarlacc.mp3';
 
 const MODEL_PATH = '/models/sarlacc.glb'
 
